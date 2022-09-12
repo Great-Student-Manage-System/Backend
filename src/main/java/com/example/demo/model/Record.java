@@ -6,4 +6,5 @@ public class Record {
     private String detailSubject; //Todo 타입 변경 필요
     private int examId;
     private int score;
+    private int year;
 }

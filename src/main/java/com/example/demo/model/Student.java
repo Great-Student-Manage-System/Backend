@@ -6,4 +6,5 @@ public class Student {
     private int grade;
     private String subjects; // Todo 개선 필요
     private String school;
+    private int year;
 }
