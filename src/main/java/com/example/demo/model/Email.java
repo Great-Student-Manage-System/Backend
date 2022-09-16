@@ -26,4 +26,10 @@ public class Email {
     public String toString(){
         return str;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Email email = (Email) obj;
+        return email.str.contentEquals(this.str);
+    }
 }
