@@ -34,7 +34,7 @@ public class ExamServiceImpl implements ExamService {
             ErrorMessage errorMessage = ErrorMessage.builder()
                     .message("examId가 잘못되었습니다.")
                     .code(404)
-                    .method(HttpMethod.GET.name())
+                    .method(HttpMethod.GET)
                     .build();
             return new SystemException(errorMessage);
         });
