@@ -5,7 +5,7 @@ import org.springframework.lang.NonNull;
 
 public class SystemException extends RuntimeException{
     @NonNull
-    ErrorMessage errorMessage;
+    private ErrorMessage errorMessage;
 
     public SystemException(ErrorMessage errorMessage){
         this.errorMessage = errorMessage;
