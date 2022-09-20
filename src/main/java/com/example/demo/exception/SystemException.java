@@ -1,7 +1,6 @@
 package com.example.demo.exception;
 
 import com.example.demo.model.ErrorMessage;
-import org.springframework.lang.NonNull;
 
 public class SystemException extends RuntimeException{
     @NonNull
@@ -12,6 +11,11 @@ public class SystemException extends RuntimeException{
     }
 
     public ErrorMessage toError(){
-        return errorMessage;
+        ErrorMessage.ErrorMessageBuilder builder = ErrorMessage.builder();
+        builder.code(code)
+                .message(msg)
+                .path(path)
+                .method(method);
+        return builder.build();
     }
 }
