@@ -1,17 +1,22 @@
 package com.example.demo.exception;
 
 import com.example.demo.model.ErrorMessage;
-import org.springframework.lang.NonNull;
 
 public class SystemException extends RuntimeException{
-    @NonNull
-    ErrorMessage errorMessage;
-
-    public SystemException(ErrorMessage errorMessage){
-        this.errorMessage = errorMessage;
+    int code;
+    String path;
+    String method;
+    String msg;
+    public SystemException(String msg){
+        super(msg);
     }
 
     public ErrorMessage toError(){
-        return errorMessage;
+        ErrorMessage.ErrorMessageBuilder builder = ErrorMessage.builder();
+        builder.code(code)
+                .message(msg)
+                .path(path)
+                .method(method);
+        return builder.build();
     }
 }
