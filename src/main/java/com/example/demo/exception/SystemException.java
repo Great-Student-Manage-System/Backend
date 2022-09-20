@@ -3,12 +3,11 @@ package com.example.demo.exception;
 import com.example.demo.model.ErrorMessage;
 
 public class SystemException extends RuntimeException{
-    int code;
-    String path;
-    String method;
-    String msg;
-    public SystemException(String msg){
-        super(msg);
+    @NonNull
+    private ErrorMessage errorMessage;
+
+    public SystemException(ErrorMessage errorMessage){
+        this.errorMessage = errorMessage;
     }
 
     public ErrorMessage toError(){
