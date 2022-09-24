@@ -14,5 +14,5 @@ public interface TeacherRepository {
     Optional<Teacher> findByNickName(String nickname);
     void updateNickname(int id, String nickname);
     void updatePassword(UpdtatePasswordDto dto);
-    void findByEmailPassword(Email email, Password password);
+    Optional<Teacher> findByEmailPassword(Email email, Password password);
 }
