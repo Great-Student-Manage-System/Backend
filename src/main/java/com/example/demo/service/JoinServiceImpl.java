@@ -56,37 +56,6 @@ public class JoinServiceImpl implements JoinService {
     }
 
     @Override
-    public Token login(Email email, Password password) {
-        teacherRepository.findByEmailPassword(email, password);
-        return new Token() {
-            @Override
-            public String getAccessToken() {
-                return null;
-            }
-
-            @Override
-            public String getRefreshToken() {
-                return null;
-            }
-
-            @Override
-            public Token renewalToken(String refreshToken) {
-                return null;
-            }
-        };
-    }
-
-    @Override
-    public void join(Teacher teacher) {
-        teacherRepository.save(teacher);
-    }
-
-    @Override
-    public Token renewalToken(Token token) {
-        return token.renewalToken(token.getRefreshToken()); //Todo Token 구조 변경 필요
-    }
-
-    @Override
     public void updateTeacherNickname(Teacher teacher, String nickname) {
         teacherRepository.updateNickname(teacher.getId(), nickname);
     }
