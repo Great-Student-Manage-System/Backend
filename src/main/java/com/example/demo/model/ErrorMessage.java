@@ -12,5 +12,6 @@ public class ErrorMessage {
     private String message;
     @Setter
     private String path;
+    @Setter
     private HttpMethod method;
 }
