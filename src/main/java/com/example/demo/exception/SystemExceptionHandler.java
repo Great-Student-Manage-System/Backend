@@ -12,7 +12,7 @@ public class SystemExceptionHandler {
     @ExceptionHandler(SystemException.class)
     public ResponseEntity<ErrorMessage> handle(SystemException e, HttpServletRequest request){
         e.printStackTrace();
-        ErrorMessage errorMessage = e.toError();
+        ErrorMessage errorMessage = e.getErrorMessage();
         errorMessage.setPath(request.getRequestURI());
         int status = errorMessage.getCode();
         return ResponseEntity.status(status).body(errorMessage);
