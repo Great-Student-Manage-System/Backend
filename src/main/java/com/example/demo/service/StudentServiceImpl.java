@@ -17,6 +17,8 @@ public class StudentServiceImpl implements StudentService{
 
     @Override
     public void addStudent(Student student) {
+
         studentRepository.save(student);
+        //student 생성자에 빠진 값 있는지 확인
     }
 }
