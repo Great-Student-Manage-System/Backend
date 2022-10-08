@@ -23,6 +23,5 @@ public class StudentServiceImpl implements StudentService{
     public void addStudent(AddStudentDto student) {
 
         studentRepository.save(student);
-        //student 생성자에 빠진 값 있는지 확인
     }
 }
