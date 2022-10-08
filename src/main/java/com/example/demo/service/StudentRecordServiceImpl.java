@@ -2,14 +2,13 @@ package com.example.demo.service;
 
 import com.example.demo.exception.SystemException;
 import com.example.demo.model.*;
+import com.example.demo.model.dto.request.UpdateRecordDto;
 import com.example.demo.repository.RecordRepository;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.ErrorManager;
 
 @Service
 public class StudentRecordServiceImpl implements StudentRecordService{
@@ -36,9 +35,9 @@ public class StudentRecordServiceImpl implements StudentRecordService{
     }
 
     @Override
-    public void updateStudentRecord(RecordUpdateDto recordUpdateDto) {
+    public void updateStudentRecord(UpdateRecordDto updateRecordDto) {
         try{
-            recordRepository.update(recordUpdateDto);
+            recordRepository.update(updateRecordDto);
         }catch(Exception e){
             ErrorMessage errorMessage = ErrorMessage.builder()
                     .code(404)
