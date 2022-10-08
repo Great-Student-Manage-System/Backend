@@ -2,9 +2,9 @@ package com.example.demo.token;
 
 import com.example.demo.exception.SystemException;
 import com.example.demo.model.Email;
-import com.example.demo.model.ErrorMessage;
+import com.example.demo.model.dto.response.ErrorMessage;
 import com.example.demo.model.Password;
-import com.example.demo.model.Teacher;
+import com.example.demo.model.dto.response.SelectTeacherResponseDto;
 import com.example.demo.repository.TeacherRepository;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +69,7 @@ public class TokenManagerImpl implements TokenManager {
 
     @Override
     public Tokens makeTokens(Email email, Password password) {
-        Teacher teacher = teacherRepository.findByEmailPassword(email,password).orElseThrow((Supplier<SystemException>) () -> {
+        SelectTeacherResponseDto teacher = teacherRepository.findByEmailPassword(email,password).orElseThrow((Supplier<SystemException>) () -> {
             ErrorMessage errorMessage = ErrorMessage.builder()
                     .message("이메일 혹은 비밀번호가 잘못되었습니다.")
                     .code(401).build();

@@ -7,5 +7,6 @@ import lombok.Getter;
  */
 @Getter
 public class UpdateTeacherDto {
+    int id;
     String nickName;
 }

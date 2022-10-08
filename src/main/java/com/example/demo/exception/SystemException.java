@@ -1,6 +1,6 @@
 package com.example.demo.exception;
 
-import com.example.demo.model.ErrorMessage;
+import com.example.demo.model.dto.response.ErrorMessage;
 import lombok.Getter;
 import org.springframework.lang.NonNull;
 

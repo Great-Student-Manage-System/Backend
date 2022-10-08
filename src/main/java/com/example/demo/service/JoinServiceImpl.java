@@ -1,7 +1,11 @@
 package com.example.demo.service;
 
 import com.example.demo.exception.SystemException;
-import com.example.demo.model.*;
+import com.example.demo.model.Email;
+import com.example.demo.model.dto.response.ErrorMessage;
+import com.example.demo.model.dto.request.UpdatePasswordDto;
+import com.example.demo.model.dto.request.UpdateTeacherDto;
+import com.example.demo.model.dto.response.SelectTeacherResponseDto;
 import com.example.demo.repository.CertRepository;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.repository.TeacherRepository;
@@ -56,18 +60,18 @@ public class JoinServiceImpl implements JoinService {
     }
 
     @Override
-    public void updateTeacherNickname(Teacher teacher, String nickname) {
-        teacherRepository.updateNickname(teacher.getId(), nickname);
+    public void updateTeacherNickname(UpdateTeacherDto dto) {
+        teacherRepository.updateNickname(dto);
     }
 
     @Override
-    public void updateTeacherPassword(UpdtatePasswordDto passwordDto) {
-        teacherRepository.updatePassword(passwordDto);
+    public void updateTeacherPassword(UpdatePasswordDto dto) {
+        teacherRepository.updatePassword(dto);
     }
 
     @Override
-    public Teacher getTeacher(int teacherId) {
-        Optional<Teacher> result = teacherRepository.findById(teacherId);
+    public SelectTeacherResponseDto getTeacher(int teacherId) {
+        Optional<SelectTeacherResponseDto> result = teacherRepository.findById(teacherId);
         return result.orElseThrow(()->{
             ErrorMessage errorMessage = ErrorMessage.builder()
                     .message("teacherId가 잘못되었습니다.")

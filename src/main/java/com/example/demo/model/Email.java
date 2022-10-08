@@ -1,7 +1,5 @@
 package com.example.demo.model;
 
-import com.example.demo.exception.SystemException;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

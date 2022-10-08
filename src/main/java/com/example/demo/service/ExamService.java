@@ -1,13 +1,11 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Exam;
-import com.example.demo.model.ExamStatistics;
+import com.example.demo.model.dto.response.SelectExamResponseDto;
+import com.example.demo.model.dto.response.SelectExamsResponseDto;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 public interface ExamService {
-    List<Exam> getExams(LocalDate year);
-    ExamStatistics getExam(int examId);
+    SelectExamsResponseDto getExams(LocalDate year);
+    SelectExamResponseDto getExam(int examId);
 }

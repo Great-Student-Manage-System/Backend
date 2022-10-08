@@ -1,8 +1,10 @@
 package com.example.demo.service;
 
 import com.example.demo.exception.SystemException;
-import com.example.demo.model.*;
+import com.example.demo.model.dto.response.ErrorMessage;
+import com.example.demo.model.dto.request.AddRecordDto;
 import com.example.demo.model.dto.request.UpdateRecordDto;
+import com.example.demo.model.dto.response.SelectRecordResponseDto;
 import com.example.demo.repository.RecordRepository;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -15,13 +17,12 @@ public class StudentRecordServiceImpl implements StudentRecordService{
 
     private RecordRepository recordRepository;
     @Override
-    public List<Record> getStudentRecords(int studentId, String subject, LocalDate year) {
-        RecordSelectDto selectDto = new RecordSelectDto(studentId, subject, year);
-        return recordRepository.findByRecordSelectDto(selectDto);
+    public List<SelectRecordResponseDto> getStudentRecords(int studentId, String subject, LocalDate year) {
+        return recordRepository.findByRecordSelectDto(studentId, subject, year.getYear());
     }
 
     @Override
-    public void addStudentRecord(Record record) {
+    public void addStudentRecord(AddRecordDto record) {
         try{
             recordRepository.save(record);
         }catch (Exception e){

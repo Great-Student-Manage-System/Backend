@@ -7,6 +7,7 @@ import lombok.Getter;
  */
 @Getter
 public class UpdatePasswordDto {
+    int id;
     String password;
     String newPassword;
 }

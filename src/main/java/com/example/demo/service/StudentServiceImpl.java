@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Student;
+import com.example.demo.model.dto.request.AddStudentDto;
+import com.example.demo.model.dto.response.SelectStudentResponseDto;
+import com.example.demo.model.dto.response.SelectStudentsResponseDto;
 import com.example.demo.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +13,14 @@ public class StudentServiceImpl implements StudentService{
 
     private StudentRepository studentRepository;
     @Override
-    public List<Student> getStudents(int teacherId, int page) {
-        return studentRepository.findByTeacher(teacherId, page);
+    public SelectStudentsResponseDto getStudents(int teacherId, int page) {
+        int maxPage = 1; //ToDo 최대 페이지 구현 필요
+        List<SelectStudentResponseDto> list = studentRepository.findByTeacher(teacherId, page);
+        return new SelectStudentsResponseDto(maxPage,list);
     }
 
     @Override
-    public void addStudent(Student student) {
+    public void addStudent(AddStudentDto student) {
 
         studentRepository.save(student);
         //student 생성자에 빠진 값 있는지 확인

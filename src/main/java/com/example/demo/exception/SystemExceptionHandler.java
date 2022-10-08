@@ -1,6 +1,6 @@
 package com.example.demo.exception;
 
-import com.example.demo.model.ErrorMessage;
+import com.example.demo.model.dto.response.ErrorMessage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

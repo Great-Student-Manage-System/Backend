@@ -1,10 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Student;
-
-import java.util.List;
+import com.example.demo.model.dto.request.AddStudentDto;
+import com.example.demo.model.dto.response.SelectStudentsResponseDto;
 
 public interface StudentService {
-    List<Student> getStudents(int teacherId, int page);
-    void addStudent(Student student);
+    SelectStudentsResponseDto getStudents(int teacherId, int page);
+    void addStudent(AddStudentDto student);
 }
