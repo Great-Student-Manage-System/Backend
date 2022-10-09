@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface StudentRepository {
-    void save(AddStudentDto student);
+    void save(int TeacherId,AddStudentDto student);
     Optional<SelectStudentResponseDto> findById(int id);
     List<SelectStudentResponseDto> findByName(String name);
     List<SelectStudentResponseDto> findByGrade(int grade);
