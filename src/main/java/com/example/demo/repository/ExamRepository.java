@@ -1,14 +1,16 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.Exam;
-import com.example.demo.model.ExamStatistics;
+import com.example.demo.model.dto.request.AddExamDto;
+import com.example.demo.model.dto.request.UpdateExamDto;
+import com.example.demo.model.dto.response.SelectExamResponseDto;
+import com.example.demo.model.dto.response.SelectExamsResponseDto;
 
-import java.util.List;
+import java.time.LocalDate;
 import java.util.Optional;
 
 public interface ExamRepository {
-    void save(Exam exam, ExamStatistics examStatistics);
-    Optional<ExamStatistics> findById(int examId);
-    List<Exam> findByYear(int year);
-    void update(Exam exam, ExamStatistics examStatistics);
+    void save(AddExamDto dto);
+    Optional<SelectExamResponseDto> findById(int examId);
+    SelectExamsResponseDto findByYear(LocalDate year);
+    void update(UpdateExamDto dto);
 }

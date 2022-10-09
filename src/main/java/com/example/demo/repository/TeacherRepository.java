@@ -2,17 +2,18 @@ package com.example.demo.repository;
 
 import com.example.demo.model.Email;
 import com.example.demo.model.Password;
-import com.example.demo.model.Teacher;
-import com.example.demo.model.UpdtatePasswordDto;
+import com.example.demo.model.dto.request.JoinDto;
+import com.example.demo.model.dto.request.UpdatePasswordDto;
+import com.example.demo.model.dto.request.UpdateTeacherDto;
+import com.example.demo.model.dto.response.SelectTeacherResponseDto;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface TeacherRepository {
-    void save(Teacher teacher);
-    Optional<Teacher> findById(int id);
-    Optional<Teacher> findByNickName(String nickname);
-    void updateNickname(int id, String nickname);
-    void updatePassword(UpdtatePasswordDto dto);
-    void findByEmailPassword(Email email, Password password);
+    void save(JoinDto teacher);
+    Optional<SelectTeacherResponseDto> findById(int id);
+    Optional<SelectTeacherResponseDto> findByNickName(String nickname);
+    void updateNickname(UpdateTeacherDto dto);
+    void updatePassword(UpdatePasswordDto dto);
+    Optional<SelectTeacherResponseDto> findByEmailPassword(Email email, Password password);
 }

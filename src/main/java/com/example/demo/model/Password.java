@@ -5,8 +5,17 @@ import org.springframework.lang.NonNull;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 비밀번호를 표현하는 클래스 입니다.
+ */
 public class Password {
     @NonNull private final String pw;
+
+    /**
+     *
+     * @param password 비밀번호 문자열
+     * @throws IllegalArgumentException 비밀번호 생성규칙을 만족하지 못할 때
+     */
     public Password(String password){
         if(validate(password)){
             this.pw = password;
@@ -23,6 +32,10 @@ public class Password {
         return matcher.matches();
     }
 
+    /**
+     *
+     * @return 비밀번호를 문자열 형태로 반환합니다.
+     */
     @Override
     public String toString() {
         return pw;

@@ -1,13 +1,34 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Record;
-import com.example.demo.model.Subject;
+import com.example.demo.model.dto.request.AddRecordDto;
+import com.example.demo.model.dto.request.UpdateRecordDto;
+import com.example.demo.model.dto.response.SelectRecordResponseDto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * 학생의 성적을 다루는 Service 계층의 인터페이스입니다.
+ */
 public interface StudentRecordService {
-    List<Record> getStudentRecords(int studentId, Subject subject, Date year);
-    void addStudentRecord(Record record);
-    void updateStudentRecord(Record record);
+    /**
+     * 특정 학생의 특정 년도의 특정 과목의 성적을 조회합니다.
+     * @param studentId 학생의 고유 아이디
+     * @param subject 과목이름
+     * @param year 년도
+     * @return 성적리스트
+     */
+    List<SelectRecordResponseDto> getStudentRecords(int studentId, String subject, LocalDate year);
+
+    /**
+     * 학생의 성적을 추가합니다.
+     * @param record 성적정보
+     */
+    void addStudentRecord(AddRecordDto record);
+
+    /**
+     * 학생의 성적을 수정합니다.
+     * @param updateRecordDto 성적정보
+     */
+    void updateStudentRecord(UpdateRecordDto updateRecordDto);
 }
