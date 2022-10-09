@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -48,8 +50,8 @@ public class JoinServiceImpl implements JoinService {
     }
     @Override
     public void certEmail(Email email, String code) {
-        Email selectedEmail = certRepository.findEmailByCode(code);
-        if (!email.equals(selectedEmail)){
+        List<Email> selectedEmails = certRepository.findEmailByCode(code);
+        if (!selectedEmails.contains(email)){
             ErrorMessage errorMessage = ErrorMessage.builder()
                     .message("인증번호가 잘못되었습니다.")
                     .code(401)
