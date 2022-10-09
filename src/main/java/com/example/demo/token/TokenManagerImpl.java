@@ -8,6 +8,7 @@ import com.example.demo.model.dto.response.SelectTeacherResponseDto;
 import com.example.demo.repository.TeacherRepository;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -18,7 +19,8 @@ import java.util.function.Supplier;
 public class TokenManagerImpl implements TokenManager {
     @Autowired
     private TeacherRepository teacherRepository;
-    private static final String SECRET = "";// 키는 DB에 넣어두고, 절대 변하지 않으므로, 어플리케이션 실행직후 이를 불러와 Bean으로 등록하여 사용할 것임.
+    @Value("${jwtKey}")
+    private static String SECRET;
     private static final String ISS = "Great";
     @Override
     public int getIdFromAccessToken(AccessToken token) {
