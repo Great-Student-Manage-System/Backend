@@ -12,10 +12,4 @@ import java.util.List;
 @Getter
 public class SelectExamsResponseDto {
     private List<ExamDto> data;
-    private static class ExamDto {
-        int examId;
-        String examName;
-        int schoolYear;
-        String subject;
-    }
 }

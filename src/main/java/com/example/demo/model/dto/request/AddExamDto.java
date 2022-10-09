@@ -13,4 +13,13 @@ public class AddExamDto {
     private LocalDate examDate;
     private int[] gradeCut;
     private String subject;
+
+    public String getGradeCut(){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int a : gradeCut) {
+            stringBuilder.append(a).append(',');
+        }
+        stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(","));
+        return stringBuilder.toString();
+    }
 }
