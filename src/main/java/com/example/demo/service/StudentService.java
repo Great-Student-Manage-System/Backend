@@ -17,7 +17,8 @@ public interface StudentService {
 
     /**
      * 특정 선생님이 가르치는 학생을 추가합니다.
+     * @param teacherId 선생님 고유 아이디
      * @param student 학생 정보
      */
-    void addStudent(AddStudentDto student);
+    void addStudent(int teacherId, AddStudentDto student);
 }

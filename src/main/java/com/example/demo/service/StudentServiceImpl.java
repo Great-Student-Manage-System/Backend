@@ -20,8 +20,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public void addStudent(AddStudentDto student) {
-
-        studentRepository.save(student);
+    public void addStudent(int teacherId,AddStudentDto student) {
+        studentRepository.save(teacherId,student);
     }
 }
