@@ -4,13 +4,14 @@ import com.example.demo.model.dto.request.AddStudentDto;
 import com.example.demo.model.dto.response.SelectStudentResponseDto;
 import com.example.demo.model.dto.response.SelectStudentsResponseDto;
 import com.example.demo.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService{
-
+    @Autowired
     private StudentRepository studentRepository;
     @Override
     public SelectStudentsResponseDto getStudents(int teacherId, int page) {

@@ -18,8 +18,7 @@ public class SelectStudentsController {
     @GetMapping("/api/students/{page}")
     public ResponseEntity<ResponseDto<?>> getStudentList(@PathVariable int page){
         int teacherID = 1;
-//        SelectStudentsResponseDto dto = studentService.getStudents(teacherID,page);
-        SelectStudentsResponseDto dto = new SelectStudentsResponseDto(1, Collections.EMPTY_LIST);
+        SelectStudentsResponseDto dto = studentService.getStudents(teacherID,page);
 
         ResponseDto<SelectStudentsResponseDto> responseDto = ResponseDto.<SelectStudentsResponseDto>builder()
                 .code(200)

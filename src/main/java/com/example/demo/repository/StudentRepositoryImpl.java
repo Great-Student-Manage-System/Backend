@@ -50,7 +50,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public List<SelectStudentResponseDto> findByTeacher(int teacherId, int page) {
-        String sql = "select * from student where teacher = ? limit(?,?)";
+        String sql = "select * from student where teacher = ? limit ?,?";
         return jdbcTemplate.query(sql,new SelectStudentResponseDtoRowMapper<>(), teacherId, (page-1)*10,10);
     }
 
