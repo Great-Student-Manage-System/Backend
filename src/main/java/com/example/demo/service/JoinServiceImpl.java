@@ -63,11 +63,18 @@ public class JoinServiceImpl implements JoinService {
     @Override
     public void join(JoinDto joinDto) {
         try {
+지            Password password = new Password(joinDto.getPassword());
             teacherRepository.save(joinDto);
         }catch (DataAccessException e){
             ErrorMessage errorMessage = ErrorMessage.builder()
                     .code(409)
                     .message("이미 가입된 이메일입니다")
+                    .build();
+            throw new SystemException(errorMessage);
+        }catch (IllegalArgumentException e){
+            ErrorMessage errorMessage = ErrorMessage.builder()
+                    .code(409)
+                    .message(e.getMessage())
                     .build();
             throw new SystemException(errorMessage);
         }
