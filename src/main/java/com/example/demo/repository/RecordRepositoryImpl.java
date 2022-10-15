@@ -23,7 +23,7 @@ public class RecordRepositoryImpl implements RecordRepository {
 
     @Override
     public List<SelectRecordResponseDto> findByRecordSelectDto(int studentId, String subject, int year) {
-        String sql = "select * from record where student = ? and subject =? and subject =? " +
+        String sql = "select * from record where student = ? and detailSubject =?" +
                 "and exam in (select id from exam where Year(examDate) = ?)";
         return jdbcTemplate.query(sql, new SelectRecordResponseDtoRowMapper<>(),studentId,subject,year);
     }

@@ -6,6 +6,7 @@ import com.example.demo.model.dto.request.AddRecordDto;
 import com.example.demo.model.dto.request.UpdateRecordDto;
 import com.example.demo.model.dto.response.SelectRecordResponseDto;
 import com.example.demo.repository.RecordRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Service
 public class StudentRecordServiceImpl implements StudentRecordService{
-
+    @Autowired
     private RecordRepository recordRepository;
     @Override
     public List<SelectRecordResponseDto> getStudentRecords(int studentId, String subject, LocalDate year) {
