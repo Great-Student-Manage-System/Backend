@@ -63,7 +63,7 @@ public class JoinServiceImpl implements JoinService {
     @Override
     public void join(JoinDto joinDto) {
         try {
-지            Password password = new Password(joinDto.getPassword());
+            Password password = new Password(joinDto.getPassword());
             teacherRepository.save(joinDto);
         }catch (DataAccessException e){
             ErrorMessage errorMessage = ErrorMessage.builder()
