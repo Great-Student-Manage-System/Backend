@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.exception.SystemException;
 import com.example.demo.model.Email;
+import com.example.demo.model.dto.request.JoinDto;
 import com.example.demo.model.dto.response.ErrorMessage;
 import com.example.demo.model.dto.request.UpdatePasswordDto;
 import com.example.demo.model.dto.request.UpdateTeacherDto;
@@ -10,6 +11,7 @@ import com.example.demo.repository.CertRepository;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +54,19 @@ public class JoinServiceImpl implements JoinService {
             ErrorMessage errorMessage = ErrorMessage.builder()
                     .message("인증번호가 잘못되었습니다.")
                     .code(401)
-                    .method(HttpMethod.GET)
+                    .build();
+            throw new SystemException(errorMessage);
+        }
+    }
+
+    @Override
+    public void join(JoinDto joinDto) {
+        try {
+            teacherRepository.save(joinDto);
+        }catch (DataAccessException e){
+            ErrorMessage errorMessage = ErrorMessage.builder()
+                    .code(409)
+                    .message("이미 가입된 이메일입니다")
                     .build();
             throw new SystemException(errorMessage);
         }

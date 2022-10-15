@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Email;
+import com.example.demo.model.dto.request.JoinDto;
 import com.example.demo.model.dto.request.UpdatePasswordDto;
 import com.example.demo.model.dto.request.UpdateTeacherDto;
 import com.example.demo.model.dto.response.SelectTeacherResponseDto;
@@ -28,6 +29,12 @@ public interface JoinService {
      * @param code 이메일로 전송받은 인증코드
      */
     void certEmail(Email email,String code);
+
+    /**
+     * 회원가입을 진행합니다.
+     * @param joinDto 회원가입 정보
+     */
+    void join(JoinDto joinDto);
 
     /**
      * 선생님의 닉네임을 수정합니다.
