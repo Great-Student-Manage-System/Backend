@@ -23,7 +23,7 @@ public interface JoinService {
     String createEmailCode(Email email);
 
     /**
-     *
+     * 인증코드를 인증합니다.
      * @param email 인증받고싶은 이메일
      * @param code 이메일로 전송받은 인증코드
      */
