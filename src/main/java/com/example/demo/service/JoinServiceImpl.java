@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.exception.SystemException;
 import com.example.demo.model.Email;
+import com.example.demo.model.Password;
 import com.example.demo.model.dto.request.JoinDto;
 import com.example.demo.model.dto.response.ErrorMessage;
 import com.example.demo.model.dto.request.UpdatePasswordDto;
@@ -74,11 +75,19 @@ public class JoinServiceImpl implements JoinService {
 
     @Override
     public void updateTeacherNickname(UpdateTeacherDto dto) {
-        teacherRepository.updateNickname(dto);
+        try {
+            teacherRepository.updateNickname(dto);
+        }catch (DataAccessException e){
+            ErrorMessage errorMessage = ErrorMessage.builder()
+                    .message("닉네임이 중복됩니다.")
+                    .code(403).build();
+            throw new SystemException(errorMessage);
+        }
     }
 
     @Override
     public void updateTeacherPassword(UpdatePasswordDto dto) {
+        Password newPassword = new Password(dto.getNewPassword()); // Password 생성자에는 비밀번호 생성규칙 만족여부 체크 로직이 있다.
         teacherRepository.updatePassword(dto);
     }
 
