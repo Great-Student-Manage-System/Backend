@@ -39,14 +39,11 @@ public class JoinServiceImpl implements JoinService {
     }
 
     @Override
-    public void createEmailCode(Email email) {
+    public String createEmailCode(Email email) {
         Random random = new Random();
         int code = random.nextInt(900000) + 100000;
         certRepository.saveEmailCod(email,code+"");
-        sendEmail(email);
-    }
-    private void sendEmail(Email email) {
-
+        return code+"";
     }
     @Override
     public void certEmail(Email email, String code) {
