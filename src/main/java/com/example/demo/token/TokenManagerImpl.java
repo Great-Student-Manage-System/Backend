@@ -19,8 +19,8 @@ import java.util.function.Supplier;
 public class TokenManagerImpl implements TokenManager {
     @Autowired
     private TeacherRepository teacherRepository;
-    @Value("${jwtKey}")
-    private static String SECRET;
+    @Value("${jwt.key}")
+    private String SECRET;
     private static final String ISS = "Great";
     @Override
     public int getIdFromAccessToken(AccessToken token) {

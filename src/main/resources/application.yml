@@ -3,4 +3,5 @@ spring:
     url: "jdbc:mariadb://localhost:3306/great"
     username: "greatManager"
     password: "!Q@W#E$R%T"
-jwtKey: "v76yqlmjqowq45vmjn^*qor@#!kjvyuwqvr"
+jwt:
+  key: "v76yqlmjqowq45vmjn^*qor@#!kjvyuwqvr"
