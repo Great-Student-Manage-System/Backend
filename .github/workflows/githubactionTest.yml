@@ -26,7 +26,7 @@ jobs:
       - name: Create DB, DB user, grant permission
         run: |
               sudo mysql -e "create database if not exists great"
-              sudo mysql -e "create user 'greatManager'@localhost identified by '!Q@W#E$R%T'"
+              sudo mysql -e "create user 'greatManager'@localhost identified by 'great123!@#'"
               sudo mysql -e "grant all privileges on great.* to 'greatManager'@localhost"
       - name: read repository
         uses: actions/checkout@v3
