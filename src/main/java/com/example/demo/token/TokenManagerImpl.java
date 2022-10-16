@@ -45,7 +45,10 @@ public class TokenManagerImpl implements TokenManager {
         String accessTokenString = accessToken.getTokenString();
         String refreshTokenString = refreshToken.getTokenString();
         if(validateToken(accessTokenString)&&validateToken(refreshTokenString)){
-            return tokens;
+            ErrorMessage errorMessage = ErrorMessage.builder()
+                    .message("아직 엑세스 토큰이 유효합니다. 갱신되지 않았습니다.")
+                    .code(400).build();
+            throw new SystemException(errorMessage);
         }else {
             if(!validateToken(refreshTokenString)){
                 ErrorMessage errorMessage = ErrorMessage.builder()
