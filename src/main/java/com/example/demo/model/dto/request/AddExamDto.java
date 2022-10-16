@@ -13,6 +13,7 @@ public class AddExamDto {
     private LocalDate examDate;
     private int[] gradeCut;
     private String subject;
+    private int schoolYear;
 
     public String getGradeCut(){
         StringBuilder stringBuilder = new StringBuilder();
