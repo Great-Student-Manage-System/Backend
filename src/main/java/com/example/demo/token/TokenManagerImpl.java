@@ -7,11 +7,13 @@ import com.example.demo.model.Password;
 import com.example.demo.model.dto.response.SelectTeacherResponseDto;
 import com.example.demo.repository.TeacherRepository;
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.impl.FixedClock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.util.Date;
 import java.util.function.Supplier;
 
@@ -27,10 +29,11 @@ public class TokenManagerImpl implements TokenManager {
         String tokenString = token.getTokenString();
         tokenString = tokenString.replace("Bearer ","");
         JwtParser parser = Jwts.parser();
-        Claims claims = parser.setSigningKey(SECRET).parseClaimsJws(tokenString).getBody();
-        if(validateToken(tokenString)){
-            return claims.get("id",Integer.class);
-        }else {
+        io.jsonwebtoken.Clock fixed = new FixedClock(Date.from(Instant.parse("1999-04-29T10:15:30.00Z")));
+        Claims claims = parser.setClock(fixed).setSigningKey(SECRET).parseClaimsJws(tokenString).getBody();
+        if (validateToken(tokenString)) {
+            return claims.get("id", Integer.class);
+        } else {
             ErrorMessage errorMessage = ErrorMessage.builder()
                     .message("인증토큰이 만료되었습니다.")
                     .code(401).build();
@@ -56,7 +59,7 @@ public class TokenManagerImpl implements TokenManager {
                         .code(401).build();
                 throw new SystemException(errorMessage);
             }else {
-                int idFromAccessToken = getIdFromAccessToken(accessToken);
+                int idFromAccessToken = getIdFromAccessTokenWithoutValidate(accessToken);
                 int idFromRefreshToken = getIdFromRefreshToken(refreshToken);
                 if(idFromAccessToken==idFromRefreshToken){
                     AccessToken remadeAccessToken = new AccessToken(makeAccessTokenStringById(idFromAccessToken));
@@ -70,6 +73,14 @@ public class TokenManagerImpl implements TokenManager {
                 }
             }
         }
+    }
+    private int getIdFromAccessTokenWithoutValidate(AccessToken token) {
+        String tokenString = token.getTokenString();
+        tokenString = tokenString.replace("Bearer ","");
+        JwtParser parser = Jwts.parser();
+        io.jsonwebtoken.Clock fixed = new FixedClock(Date.from(Instant.parse("1999-04-29T10:15:30.00Z")));
+        Claims claims = parser.setClock(fixed).setSigningKey(SECRET).parseClaimsJws(tokenString).getBody();
+        return claims.get("id", Integer.class);
     }
 
     @Override
@@ -87,20 +98,31 @@ public class TokenManagerImpl implements TokenManager {
     private boolean validateToken(String tokenString){
         tokenString = tokenString.replace("Bearer ","");
         JwtParser parser = Jwts.parser();
-        Claims claims = parser.setSigningKey(SECRET).parseClaimsJws(tokenString).getBody();
-        String iss = claims.getIssuer();
-        Date exp = claims.getExpiration();
-        Date now = new Date();
-        return iss.contentEquals(ISS) && now.before(exp);
+        try {
+            Claims claims = parser.setSigningKey(SECRET).parseClaimsJws(tokenString).getBody();
+            String iss = claims.getIssuer();
+            Date exp = claims.getExpiration();
+            Date now = new Date();
+            return iss.contentEquals(ISS) && now.before(exp);
+        }catch (Exception e){
+            return false;
+        }
     }
     private int getIdFromRefreshToken(RefreshToken token) {
         String tokenString = token.getTokenString();
         tokenString = tokenString.replace("Bearer ","");
         JwtParser parser = Jwts.parser();
-        Claims claims = parser.setSigningKey(SECRET).parseClaimsJws(tokenString).getBody();
-        if(validateToken(tokenString)){
-            return claims.get("id",Integer.class);
-        }else {
+        try {
+            Claims claims = parser.setSigningKey(SECRET).parseClaimsJws(tokenString).getBody();
+            if (validateToken(tokenString)) {
+                return claims.get("id", Integer.class);
+            } else {
+                ErrorMessage errorMessage = ErrorMessage.builder()
+                        .message("토큰이 유효하지 않습니다. 재 로그인이 필요합니다.")
+                        .code(401).build();
+                throw new SystemException(errorMessage);
+            }
+        }catch (ExpiredJwtException e){
             ErrorMessage errorMessage = ErrorMessage.builder()
                     .message("토큰이 유효하지 않습니다. 재 로그인이 필요합니다.")
                     .code(401).build();
