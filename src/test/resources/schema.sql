@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS `email-code`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `email-code` (
-  `email` varchar(45) NOT NULL,
+  `email` varchar(120) NOT NULL,
   `code` int(11) NOT NULL,
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -191,7 +191,7 @@ DROP TABLE IF EXISTS `teacher`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teacher` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(320) NOT NULL DEFAULT '',
+  `email` varchar(120) NOT NULL,
   `subject` varchar(45) NOT NULL,
   `nickName` varchar(45) NOT NULL,
   `password` varchar(256) NOT NULL,
@@ -199,7 +199,8 @@ CREATE TABLE `teacher` (
   unique key(`email`),
   unique key(`nickName`),
   KEY `FK_2` (`subject`),
-  CONSTRAINT `FK_6` FOREIGN KEY (`subject`) REFERENCES `subjects` (`name`)
+  CONSTRAINT `FK_6` FOREIGN KEY (`subject`) REFERENCES `subjects` (`name`) -- ,
+--  CONSTRAINT `FK_10` FOREIGN KEY (`email`) REFERENCES `email-code` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
