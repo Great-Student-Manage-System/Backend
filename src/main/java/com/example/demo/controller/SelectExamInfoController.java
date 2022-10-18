@@ -17,6 +17,6 @@ public class SelectExamInfoController {
     @GetMapping("/api/exam/{examId}")
     public ResponseEntity<ResponseDto<?>> getExam(@PathVariable int examId){
      SelectExamResponseDto examResult =  examService.getExam(examId);     //ResponseDto가 int[]인 경우 어떻게?
-     return ResponseEntity.ok(ResponseDto.builder().code(200).build());
+     return ResponseEntity.ok(ResponseDto.builder().data(examResult).response("시험 조회에 성공했습니다.").code(200).build());
     }
 }

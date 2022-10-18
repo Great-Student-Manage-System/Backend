@@ -16,9 +16,9 @@ public class SelectExamListController {
     @Autowired
     private ExamService examService;
 
-    @GetMapping("/api/exam/{year}")
+    @GetMapping("/api/exams/{year}")
     public ResponseEntity<ResponseDto<?>> getExams(@PathVariable int year){
         SelectExamsResponseDto examList = examService.getExams(LocalDate.ofYearDay(year, 1));
-        return ResponseEntity.ok(ResponseDto.builder().code(200).data(examList).build());
+        return ResponseEntity.ok(ResponseDto.builder().code(200).response("시험 목록 조회를 성공했습니다.").data(examList).build());
     }
 }
