@@ -2,7 +2,7 @@ spring:
   datasource:
     url: "jdbc:mariadb://localhost:3306/great"
     username: "greatManager"
-    password: "!Q@W#E$R%T"
+    password: "great123!@#"
   sql:
     init:
       mode: always

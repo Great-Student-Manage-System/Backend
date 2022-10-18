@@ -57,7 +57,7 @@ public class TeacherRepositoryImpl implements TeacherRepository {
     @Override
     public void updatePassword(UpdatePasswordDto dto) {
         String sql = "update teacher set password=sha2(?,256) where id = ?";
-        jdbcTemplate.update(sql,dto.getPassword(),dto.getId());
+        jdbcTemplate.update(sql,dto.getNewPassword(),dto.getId());
     }
 
     @Override

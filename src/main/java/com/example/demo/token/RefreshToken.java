@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  */
 @NoArgsConstructor
 @AllArgsConstructor
-class RefreshToken {
+public class RefreshToken {
     @Getter(AccessLevel.PACKAGE)
     private String tokenString;
 }

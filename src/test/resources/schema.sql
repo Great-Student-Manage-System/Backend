@@ -81,7 +81,7 @@ CREATE TABLE `exam` (
   PRIMARY KEY (`id`),
   KEY `subject` (`subject`),
   CONSTRAINT `exam_ibfk_1` FOREIGN KEY (`subject`) REFERENCES `detailSubjects` (`detailSubject`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,14 +108,14 @@ CREATE TABLE `record` (
   `exam` int(11) NOT NULL,
   `score` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `exam` (`exam`),
+  UNIQUE KEY `studentExam` (`exam`,`student`),
   KEY `FK_2` (`student`),
   KEY `FK_3` (`exam`),
   KEY `FK_4` (`detailSubject`),
   CONSTRAINT `FK_2` FOREIGN KEY (`student`) REFERENCES `student` (`id`),
   CONSTRAINT `FK_3` FOREIGN KEY (`exam`) REFERENCES `exam` (`id`),
   CONSTRAINT `FK_6_1` FOREIGN KEY (`detailSubject`) REFERENCES `detailSubjects` (`detailSubject`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +146,7 @@ CREATE TABLE `student` (
   PRIMARY KEY (`id`),
   KEY `FK_2` (`teacher`),
   CONSTRAINT `student_ibfk_1` FOREIGN KEY (`teacher`) REFERENCES `teacher` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,7 +198,7 @@ CREATE TABLE `teacher` (
   PRIMARY KEY (`id`),
   KEY `FK_2` (`subject`),
   CONSTRAINT `FK_6` FOREIGN KEY (`subject`) REFERENCES `subjects` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

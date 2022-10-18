@@ -22,8 +22,8 @@ public class ExamRepositoryImpl implements ExamRepository {
 
     @Override
     public void save(AddExamDto dto) {
-        String sql = "insert into exam(name,examDate,gradeCut,subject) values(?,?,?,?)";
-        jdbcTemplate.update(sql,dto.getName(), dto.getExamDate() ,dto.getGradeCut(),dto.getSubject());
+        String sql = "insert into exam(name,examDate,gradeCut,subject,schoolYear) values(?,?,?,?,?)";
+        jdbcTemplate.update(sql,dto.getName(), dto.getExamDate() ,dto.getGradeCut(),dto.getSubject(),dto.getSchoolYear());
     }
 
     @Override
@@ -51,7 +51,8 @@ public class ExamRepositoryImpl implements ExamRepository {
                         .examId(rs.getInt("id"))
                         .schoolYear(rs.getInt("schoolYear"))
                         .examName(rs.getString("name"))
-                        .subject(rs.getString("subject")).build();
+                        .subject(rs.getString("subject"))
+                        .schoolYear(rs.getInt("schoolYear")).build();
             }
         },year.getYear());
         return new SelectExamsResponseDto(result);
