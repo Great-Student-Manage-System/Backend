@@ -37,7 +37,15 @@ public class RecordRepositoryImpl implements RecordRepository {
     @Override
     public void update(UpdateRecordDto dto) {
         String sql = "update record set exam =?,score=? where id =?";
-        jdbcTemplate.update(sql,dto.getExamId(),dto.getExamResult(),dto.getRecordId());
+        if(dto.getExamId()==null){
+            sql = sql.replace("exam =?,","");
+            jdbcTemplate.update(sql,dto.getExamResult(),dto.getRecordId());
+            return;
+        }
+        if(dto.getExamResult()==null){
+            sql = sql.replace(",score=?","");
+            jdbcTemplate.update(sql,dto.getExamId(),dto.getRecordId());
+        }
     }
 
     private static class SelectRecordResponseDtoRowMapper<T extends SelectRecordResponseDto> implements RowMapper<T>{

@@ -41,6 +41,7 @@ public class StudentRecordServiceImpl implements StudentRecordService{
         try{
             recordRepository.update(updateRecordDto);
         }catch(Exception e){
+            e.printStackTrace();
             ErrorMessage errorMessage = ErrorMessage.builder()
                     .code(404)
                     .message("아직 등록된 적이 없는 시험입니다.")

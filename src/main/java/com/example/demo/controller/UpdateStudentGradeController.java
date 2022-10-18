@@ -15,10 +15,10 @@ public class UpdateStudentGradeController {
     @Autowired
     private StudentRecordService studentRecordService;
 
-    @PatchMapping("/api/studests/{studentId}")
+    @PatchMapping("/api/students/{studentId}")
     public ResponseEntity<ResponseDto<?>> updateStudentRecord(@RequestBody UpdateRecordDto dto){
         studentRecordService.updateStudentRecord(dto);
-        return ResponseEntity.ok(ResponseDto.builder().code(200).build());
+        return ResponseEntity.ok(ResponseDto.builder().code(200).response("성적을 변경했습니다.").build());
     }
 
 }
