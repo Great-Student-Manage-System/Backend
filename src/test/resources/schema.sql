@@ -196,6 +196,8 @@ CREATE TABLE `teacher` (
   `nickName` varchar(45) NOT NULL,
   `password` varchar(256) NOT NULL,
   PRIMARY KEY (`id`),
+  unique key(`email`),
+  unique key(`nickName`),
   KEY `FK_2` (`subject`),
   CONSTRAINT `FK_6` FOREIGN KEY (`subject`) REFERENCES `subjects` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
