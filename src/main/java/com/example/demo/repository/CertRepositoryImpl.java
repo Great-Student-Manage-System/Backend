@@ -20,17 +20,17 @@ public class CertRepositoryImpl implements CertRepository {
 
     @Override
     public void saveEmailCod(Email email, String code) {
-        String sql = "select count(*) from email-code where email =?";
+        String sql = "select count(*) from `email-code` where email =?";
         Integer count = jdbcTemplate.queryForObject(sql,Integer.class, email.toString());
         if(count==null){
-            sql = "insert into email-code(email,code) values(?,?)";
+            sql = "insert into `email-code`(email,code) values(?,?)";
             jdbcTemplate.update(sql,email.toString(),code);
         }else {
             if(count==1){
-                sql = "update email-code set code =? where email =?";
+                sql = "update `email-code` set code =? where email =?";
                 jdbcTemplate.update(sql,code,email.toString());
             }else{
-                sql = "insert into email-code values(?,?)";
+                sql = "insert into `email-code` values(?,?)";
                 jdbcTemplate.update(sql,email.toString(),code);
             }
         }
@@ -38,7 +38,7 @@ public class CertRepositoryImpl implements CertRepository {
 
     @Override
     public List<Email> findEmailByCode(String code) {
-        String sql = "select email from email-code where code = ?";
+        String sql = "select email from `email-code` where code = ?";
         return jdbcTemplate.query(sql, (rs, rowNum) -> new Email(rs.getString("email")),code);
     }
 }
