@@ -3,5 +3,8 @@ spring:
     url: "jdbc:mariadb://localhost:3306/great"
     username: "greatManager"
     password: "great123!@#"
+  sql:
+    init:
+      mode: always
 jwt:
   key: "v76yqlmjqowq45vmjn^*qor@#!kjvyuwqvr"

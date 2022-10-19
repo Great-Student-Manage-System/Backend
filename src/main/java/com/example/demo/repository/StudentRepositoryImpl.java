@@ -17,7 +17,7 @@ public class StudentRepositoryImpl implements StudentRepository {
     private JdbcTemplate jdbcTemplate;
     @Override
     public void save(int teacherId,AddStudentDto student) {
-        String sql = "insert into student(name,grade,teacher,subjects,school) values(?,?,?,?,?)";
+        String sql = "insert into student(name,grade,teacher,subjects,school,year) values(?,?,?,?,?,year(current_timestamp()))";
         jdbcTemplate.update(sql,student.getName(),student.getSchoolYear(),teacherId,student.getSubjects(),student.getSchool());
     }
 
@@ -50,7 +50,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public List<SelectStudentResponseDto> findByTeacher(int teacherId, int page) {
-        String sql = "select * from student where teacher = ? limit(?,?)";
+        String sql = "select * from student where teacher = ? limit ?,?";
         return jdbcTemplate.query(sql,new SelectStudentResponseDtoRowMapper<>(), teacherId, (page-1)*10,10);
     }
 

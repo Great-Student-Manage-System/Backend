@@ -13,4 +13,11 @@ import lombok.NoArgsConstructor;
 public class Tokens {
     private AccessToken accessToken;
     private RefreshToken refreshToken;
+
+    public String getAccessTokenString(){
+        return accessToken.getTokenString();
+    }
+    public String getRefreshTokenString(){
+        return refreshToken.getTokenString();
+    }
 }

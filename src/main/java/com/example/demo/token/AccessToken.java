@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter(AccessLevel.PACKAGE)
-class AccessToken {
+public class AccessToken {
     private String tokenString;
 }

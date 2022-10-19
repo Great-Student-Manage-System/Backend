@@ -1,6 +1,7 @@
 package com.example.demo.config;
 
 
+import com.example.demo.interceptor.AuthInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.sql.DataSource;
@@ -26,9 +28,12 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods("*");
     }
 
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(authInterceptor())
+                .addPathPatterns("/api/**")
+                .excludePathPatterns("/api/members/login","/api/members/join/**");
+    }
 
     @Bean
     public PlatformTransactionManager transactionManager(){
@@ -41,8 +46,8 @@ public class WebConfig implements WebMvcConfigurer {
     public JdbcTemplate jdbcTemplate(DataSource dataSource){
         return new JdbcTemplate(dataSource);
     }
-//    @Bean
-//    public AdminCertInterceptor adminCertInterceptor(){
-//        return new AdminCertInterceptor();
-//    }
+    @Bean
+    public AuthInterceptor authInterceptor(){
+        return new AuthInterceptor();
+    }
 }

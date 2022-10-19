@@ -22,13 +22,13 @@ public class ExamRepositoryImpl implements ExamRepository {
 
     @Override
     public void save(AddExamDto dto) {
-        String sql = "insert into exam(name,examDate,gradeCut,subject) values(?,?,?,?)";
-        jdbcTemplate.update(sql,dto.getName(), dto.getExamDate() ,dto.getGradeCut(),dto.getSubject());
+        String sql = "insert into exam(name,examDate,gradeCut,subject,schoolYear) values(?,?,?,?,?)";
+        jdbcTemplate.update(sql,dto.getName(), dto.getExamDate() ,dto.getGradeCut(),dto.getSubject(),dto.getSchoolYear());
     }
 
     @Override
     public Optional<SelectExamResponseDto> findById(int examId) {
-        String sql = "select gradeCut from exam where id = ?";
+        String sql = "select * from exam where id = ?";
         SelectExamResponseDto examResponseDto = jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
             String gradeCut = rs.getString("gradeCut");
             String[] grades = gradeCut.split(",");
@@ -36,7 +36,13 @@ public class ExamRepositoryImpl implements ExamRepository {
             for (int i = 0; i < arr.length; i++) {
                 arr[i] = Integer.parseInt(grades[i]);
             }
-            return new SelectExamResponseDto(arr);
+            return SelectExamResponseDto.builder()
+                    .examId(rs.getInt("id"))
+                    .examName(rs.getString("name"))
+                    .subject(rs.getString("subject"))
+                    .schoolYear(rs.getInt("schoolYear"))
+                    .gradeCut(arr)
+                    .build();
         },examId);
         return Optional.of(examResponseDto);
     }
@@ -44,16 +50,12 @@ public class ExamRepositoryImpl implements ExamRepository {
     @Override
     public SelectExamsResponseDto findByYear(LocalDate year) {
         String sql = "select * from exam where Year(examDate) = ?";
-        List<ExamDto> result = jdbcTemplate.query(sql, new RowMapper<ExamDto>() {
-            @Override
-            public ExamDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return ExamDto.builder()
-                        .examId(rs.getInt("id"))
-                        .schoolYear(rs.getInt("schoolYear"))
-                        .examName(rs.getString("name"))
-                        .subject(rs.getString("subject")).build();
-            }
-        },year.getYear());
+        List<ExamDto> result = jdbcTemplate.query(sql, (rs, rowNum) -> ExamDto.builder()
+                .examId(rs.getInt("id"))
+                .schoolYear(rs.getInt("schoolYear"))
+                .examName(rs.getString("name"))
+                .subject(rs.getString("subject"))
+                .schoolYear(rs.getInt("schoolYear")).build(),year.getYear());
         return new SelectExamsResponseDto(result);
     }
 

@@ -23,7 +23,7 @@ public class RecordRepositoryImpl implements RecordRepository {
 
     @Override
     public List<SelectRecordResponseDto> findByRecordSelectDto(int studentId, String subject, int year) {
-        String sql = "select * from record where student = ? and subject =? and subject =? " +
+        String sql = "select * from record where student = ? and detailSubject =?" +
                 "and exam in (select id from exam where Year(examDate) = ?)";
         return jdbcTemplate.query(sql, new SelectRecordResponseDtoRowMapper<>(),studentId,subject,year);
     }
@@ -37,7 +37,16 @@ public class RecordRepositoryImpl implements RecordRepository {
     @Override
     public void update(UpdateRecordDto dto) {
         String sql = "update record set exam =?,score=? where id =?";
-        jdbcTemplate.update(sql,dto.getExamId(),dto.getExamResult(),dto.getRecordId());
+        if(dto.getExamId()==null) {
+            sql = sql.replace("exam =?,", "");
+            jdbcTemplate.update(sql, dto.getExamResult(), dto.getRecordId());
+            return;
+        }else if(dto.getExamResult()==null){
+            sql = sql.replace(",score=?","");
+            jdbcTemplate.update(sql,dto.getExamId(),dto.getRecordId());
+        }else{
+            jdbcTemplate.update(sql,dto.getExamId(),dto.getExamResult(),dto.getRecordId());
+        }
     }
 
     private static class SelectRecordResponseDtoRowMapper<T extends SelectRecordResponseDto> implements RowMapper<T>{

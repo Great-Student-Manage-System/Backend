@@ -20,7 +20,7 @@ public class TeacherRepositoryImpl implements TeacherRepository {
     private JdbcTemplate jdbcTemplate;
     @Override
     public void save(JoinDto teacher) {
-        String sql = "insert into teacher(email,subject,nickName,password) values(?,?,?,?)";
+        String sql = "insert into teacher(email,subject,nickName,password) values(?,?,?,sha2(?,256))";
         jdbcTemplate.update(sql,teacher.getEmail(),teacher.getSubject(),teacher.getNickName(),teacher.getPassword());
     }
 
@@ -57,12 +57,12 @@ public class TeacherRepositoryImpl implements TeacherRepository {
     @Override
     public void updatePassword(UpdatePasswordDto dto) {
         String sql = "update teacher set password=sha2(?,256) where id = ?";
-        jdbcTemplate.update(sql,dto.getPassword(),dto.getId());
+        jdbcTemplate.update(sql,dto.getNewPassword(),dto.getId());
     }
 
     @Override
     public Optional<SelectTeacherResponseDto> findByEmailPassword(Email email, Password password) {
-        String sql = "select * from teacher where email =? and password = ?";
+        String sql = "select * from teacher where email =? and password = sha2(?,256)";
         SelectTeacherResponseDto result = jdbcTemplate.queryForObject(sql, (rs, rowNum) -> SelectTeacherResponseDto.builder()
                 .id(rs.getInt("id"))
                 .email(rs.getString("email"))

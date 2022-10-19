@@ -15,9 +15,12 @@ public class SystemException extends RuntimeException{
 
     /**
      * 예외가 발생한 원인과 위치 등을 포함하는 메시지를 포함한 예외를 생성합니다.
-     * @param errorMessage
+     * @param errorMessage 클라이언트에 전달할 에러메시지
      */
     public SystemException(ErrorMessage errorMessage){
+        super(errorMessage.getMessage());
         this.errorMessage = errorMessage;
     }
+
+
 }
