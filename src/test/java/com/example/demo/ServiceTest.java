@@ -5,6 +5,7 @@ import com.example.demo.model.Email;
 import com.example.demo.model.Password;
 import com.example.demo.model.dto.request.*;
 import com.example.demo.model.dto.response.*;
+import com.example.demo.repository.CertRepository;
 import com.example.demo.service.*;
 import com.example.demo.token.TokenManager;
 import com.example.demo.token.Tokens;
@@ -36,6 +37,10 @@ public class ServiceTest {
     StudentService studentService;
     @Autowired
     TokenManager tokenManager;
+
+
+    @Autowired
+    CertRepository certRepository;
 
     ObjectMapper objectMapper = new ObjectMapper();
     static AddExamDto addExamDto;
@@ -112,10 +117,11 @@ public class ServiceTest {
 //                "  \"subject\": \"물리1\"\n" +
 //                "}",UpdateExamDto.class);
     }
-
     @Order(2)
     @Test
     void join(){
+        certRepository.saveEmailCod(new Email(joinDto.getEmail()),"12345");
+        certRepository.certEmail(new Email(joinDto.getEmail()));
         joinService.join(joinDto);
     }
 

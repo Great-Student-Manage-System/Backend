@@ -30,4 +30,5 @@ INSERT INTO `subjects` VALUES
 ('영어');
 INSERT INTO `teacher` VALUES
 (1,'test@test.com','과탐','테스트','2bbe7e30ee79bfed40109dbce86945cc6ca636125c11553e7b705b90033cf2bf');
+insert into `email-code` values ('test@test.com',12345,false);
 set foreign_key_checks = 1;

@@ -51,6 +51,7 @@ DROP TABLE IF EXISTS `email-code`;
 CREATE TABLE `email-code` (
   `email` varchar(120) NOT NULL,
   `code` int(11) NOT NULL,
+  `verify` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -199,8 +200,8 @@ CREATE TABLE `teacher` (
   unique key(`email`),
   unique key(`nickName`),
   KEY `FK_2` (`subject`),
-  CONSTRAINT `FK_6` FOREIGN KEY (`subject`) REFERENCES `subjects` (`name`) -- ,
---  CONSTRAINT `FK_10` FOREIGN KEY (`email`) REFERENCES `email-code` (`email`)
+  CONSTRAINT `FK_6` FOREIGN KEY (`subject`) REFERENCES `subjects` (`name`),
+  CONSTRAINT `FK_10` FOREIGN KEY (`email`) REFERENCES `email-code` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

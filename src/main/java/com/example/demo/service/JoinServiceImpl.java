@@ -57,6 +57,8 @@ public class JoinServiceImpl implements JoinService {
                     .code(401)
                     .build();
             throw new SystemException(errorMessage);
+        }else {
+            certRepository.certEmail(email);
         }
     }
 
@@ -64,7 +66,15 @@ public class JoinServiceImpl implements JoinService {
     public void join(JoinDto joinDto) {
         try {
             Password password = new Password(joinDto.getPassword());
-            teacherRepository.save(joinDto);
+            if (certRepository.isVerified(new Email(joinDto.getEmail()))){
+                teacherRepository.save(joinDto);
+            }else {
+                ErrorMessage errorMessage = ErrorMessage.builder()
+                        .code(401)
+                        .message("인증되지 않은 이메일입니다")
+                        .build();
+                throw new SystemException(errorMessage);
+            }
         }catch (DataAccessException e){
             ErrorMessage errorMessage = ErrorMessage.builder()
                     .code(409)
