@@ -42,6 +42,8 @@ jobs:
         run: chmod +x gradlew
       - name: DB init
         run: sudo mysql great < ./src/test/resources/schema.sql
+      - name: Create application-mailKey.yml
+        run: echo ${{ secrets.MAILKEY}} >> ./src/main/resources/application-mailKey.yml
 
       - name: Build with Gradle
         run: ./gradlew clean build --stacktrace
