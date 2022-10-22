@@ -1,10 +1,12 @@
 package com.example.demo.repository;
 
+import com.example.demo.exception.SystemException;
 import com.example.demo.model.Email;
 import com.example.demo.model.Password;
 import com.example.demo.model.dto.request.JoinDto;
 import com.example.demo.model.dto.request.UpdatePasswordDto;
 import com.example.demo.model.dto.request.UpdateTeacherDto;
+import com.example.demo.model.dto.response.ErrorMessage;
 import com.example.demo.model.dto.response.SelectTeacherResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,7 +23,7 @@ public class TeacherRepositoryImpl implements TeacherRepository {
     @Override
     public void save(JoinDto teacher) {
         String sql = "insert into teacher(email,subject,nickName,password) values(?,?,?,sha2(?,256))";
-        jdbcTemplate.update(sql,teacher.getEmail(),teacher.getSubject(),teacher.getNickName(),teacher.getPassword());
+        jdbcTemplate.update(sql, teacher.getEmail(), teacher.getSubject(), teacher.getNickName(), teacher.getPassword());
     }
 
     @Override

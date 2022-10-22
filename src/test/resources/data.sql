@@ -14,6 +14,8 @@ INSERT INTO `detailSubjects` VALUES
 ('통합사회','사탐'),
 ('수학','수학'),
 ('영어','영어');
+INSERT INTO `email-code` VALUES
+('test@test.com',123456,0);
 INSERT INTO `exam` VALUES
 (1,'2022 3월모의고사','2022-03-24','48,46,40,36,30,32,30,28','물리1',3),
 (2,'2022 6월모의고사','2022-06-12','48,42,40,36,30,32,30,28','물리1',3);
@@ -29,5 +31,5 @@ INSERT INTO `subjects` VALUES
 ('수학'),
 ('영어');
 INSERT INTO `teacher` VALUES
-(1,'test@test.com','과탐','테스트','2bbe7e30ee79bfed40109dbce86945cc6ca636125c11553e7b705b90033cf2bf');
+(1,'test@test.com','과탐','진짜선생님1','2bbe7e30ee79bfed40109dbce86945cc6ca636125c11553e7b705b90033cf2bf');
 set foreign_key_checks = 1;

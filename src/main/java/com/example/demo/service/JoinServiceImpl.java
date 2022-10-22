@@ -57,25 +57,37 @@ public class JoinServiceImpl implements JoinService {
                     .code(401)
                     .build();
             throw new SystemException(errorMessage);
+        }else {
+            certRepository.certEmail(email);
         }
     }
 
     @Override
     public void join(JoinDto joinDto) {
+        Email email;
+        Password password;
         try {
-            Password password = new Password(joinDto.getPassword());
-            teacherRepository.save(joinDto);
-        }catch (DataAccessException e){
-            ErrorMessage errorMessage = ErrorMessage.builder()
-                    .code(409)
-                    .message("이미 가입된 이메일입니다")
-                    .build();
-            throw new SystemException(errorMessage);
+            email = new Email(joinDto.getEmail());
+            password = new Password(joinDto.getPassword());
         }catch (IllegalArgumentException e){
             ErrorMessage errorMessage = ErrorMessage.builder()
+                    .code(400)
+                    .message(e.getMessage()).build();
+            throw new SystemException(errorMessage);
+        }
+        if(certRepository.canJoin(email)){
+            if (certRepository.isCert(email)){
+                teacherRepository.save(joinDto);
+            }else{
+                ErrorMessage errorMessage = ErrorMessage.builder()
+                        .code(401)
+                        .message("인증되지 않은 이메일입니다.").build();
+                throw new SystemException(errorMessage);
+            }
+        }else {
+            ErrorMessage errorMessage = ErrorMessage.builder()
                     .code(409)
-                    .message(e.getMessage())
-                    .build();
+                    .message("이미 사용중인 이메일입니다.").build();
             throw new SystemException(errorMessage);
         }
     }

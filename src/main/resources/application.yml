@@ -1,19 +1,11 @@
 spring:
+  profiles:
+    active: mailKey
   datasource:
     url: "jdbc:mariadb://localhost:3306/great"
     username: "greatManager"
     password: "great123!@#"
-  mail :
-    host : smtp.gmail.com
-    port : 587
-    username : 'greatemailverify@gmail.com'
-    password : 'lcpfvtnejrphcqus'
-    properties :
-      mail :
-        smtp :
-          auth : true
-          starttls :
-            enable : true
+
 
 jwt:
   key: "v76yqlmjqowq45vmjn^*qor@#!kjvyuwqvr"
