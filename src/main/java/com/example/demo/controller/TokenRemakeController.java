@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.dto.request.LoginDto;
 import com.example.demo.model.dto.request.RemakeAccessTokenDto;
 import com.example.demo.model.dto.response.LoginResponseDto;
 import com.example.demo.model.dto.response.ResponseDto;
@@ -10,7 +9,10 @@ import com.example.demo.token.TokenManager;
 import com.example.demo.token.Tokens;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;

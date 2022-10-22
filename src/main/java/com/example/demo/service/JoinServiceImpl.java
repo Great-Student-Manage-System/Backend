@@ -4,9 +4,9 @@ import com.example.demo.exception.SystemException;
 import com.example.demo.model.Email;
 import com.example.demo.model.Password;
 import com.example.demo.model.dto.request.JoinDto;
-import com.example.demo.model.dto.response.ErrorMessage;
 import com.example.demo.model.dto.request.UpdatePasswordDto;
 import com.example.demo.model.dto.request.UpdateTeacherDto;
+import com.example.demo.model.dto.response.ErrorMessage;
 import com.example.demo.model.dto.response.SelectTeacherResponseDto;
 import com.example.demo.repository.CertRepository;
 import com.example.demo.repository.StudentRepository;
@@ -16,7 +16,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;

@@ -1,20 +1,15 @@
 package com.example.demo.repository;
 
-import com.example.demo.exception.SystemException;
 import com.example.demo.model.Email;
 import com.example.demo.model.Password;
 import com.example.demo.model.dto.request.JoinDto;
 import com.example.demo.model.dto.request.UpdatePasswordDto;
 import com.example.demo.model.dto.request.UpdateTeacherDto;
-import com.example.demo.model.dto.response.ErrorMessage;
 import com.example.demo.model.dto.response.SelectTeacherResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Optional;
 @Repository
 public class TeacherRepositoryImpl implements TeacherRepository {

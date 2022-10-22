@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.dto.request.AddRecordDto;
 import com.example.demo.model.dto.request.UpdateRecordDto;
 import com.example.demo.model.dto.response.ResponseDto;
 import com.example.demo.service.StudentRecordService;
