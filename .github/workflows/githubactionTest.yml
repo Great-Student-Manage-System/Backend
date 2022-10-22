@@ -50,9 +50,19 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build --stacktrace
       - name: Deploy
-        uses: SamKirkland/FTP-Deploy-Action@3.1.1
+        uses: SamKirkland/FTP-Deploy-Action@4.3.2
         with:
          ftp-server: ${{ secrets.FTP_HOST }}
          ftp-username: ${{ secrets.FTP_USERNAME }}
          ftp-password: ${{ secrets.FTP_PASSWORD }}
          local-dir: ./build/
+      - name: deploy file
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          username: ${{ secrets.FTP_USERNAME }}
+            server: ${{ secrets.FTP_HOST }}
+            port: ${{ secrets.FTP_PORT }}
+            local_path: './build/libs/*'
+            remote_path: '/home/j2kb'
+            sftp_only: true
+            password: ${{ secrets.FTP_PASSWORD }}
