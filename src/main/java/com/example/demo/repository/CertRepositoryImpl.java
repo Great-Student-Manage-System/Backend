@@ -15,7 +15,7 @@ public class CertRepositoryImpl implements CertRepository {
         String sql = "select count(*) from teacher where email = ?";
         Integer count = jdbcTemplate.queryForObject(sql,Integer.class, email.toString());
         if(count==null)return false;
-        return count == 1;
+        return count != 1;
     }
 
     @Override
@@ -23,14 +23,14 @@ public class CertRepositoryImpl implements CertRepository {
         String sql = "select count(*) from `email-code` where email =?";
         Integer count = jdbcTemplate.queryForObject(sql,Integer.class, email.toString());
         if(count==null){
-            sql = "insert into `email-code`(email,code,false) values(?,?)";
+            sql = "insert into `email-code`(email,code) values(?,?)";
             jdbcTemplate.update(sql,email.toString(),code);
         }else {
             if(count==1){
                 sql = "update `email-code` set code =? where email =?";
                 jdbcTemplate.update(sql,code,email.toString());
             }else{
-                sql = "insert into `email-code` values(?,?,false)";
+                sql = "insert into `email-code`(email,code) values(?,?)";
                 jdbcTemplate.update(sql,email.toString(),code);
             }
         }
@@ -44,13 +44,18 @@ public class CertRepositoryImpl implements CertRepository {
 
     @Override
     public void certEmail(Email email) {
-        String sql = "update `email-code` set verify = true where email =?";
+        String sql = "update `email-code` set verify = true where email = ?";
         jdbcTemplate.update(sql,email.toString());
     }
 
     @Override
-    public boolean isVerified(Email email) {
-        String sql = "select verify from `email-code` where email = ?";
-        return jdbcTemplate.queryForObject(sql,Boolean.class,email.toString());
+    public boolean isCert(Email email) {
+        String sql = "select count(verify) from `email-code` where email = ? and verify = true";
+        Integer result = jdbcTemplate.queryForObject(sql,Integer.class,email.toString());
+        try {
+            return result == 1;
+        }catch (NullPointerException e){
+            return false;
+        }
     }
 }

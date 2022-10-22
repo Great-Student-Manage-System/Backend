@@ -19,6 +19,27 @@
 -- Table structure for table `detailSubjects`
 --
 set foreign_key_checks = 0;
+-- MariaDB dump 10.19  Distrib 10.8.3-MariaDB, for osx10.17 (arm64)
+--
+-- Host: localhost    Database: great
+-- ------------------------------------------------------
+-- Server version	10.8.3-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `detailSubjects`
+--
+
 DROP TABLE IF EXISTS `detailSubjects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -62,6 +83,7 @@ CREATE TABLE `email-code` (
 
 LOCK TABLES `email-code` WRITE;
 /*!40000 ALTER TABLE `email-code` DISABLE KEYS */;
+
 /*!40000 ALTER TABLE `email-code` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,11 +219,11 @@ CREATE TABLE `teacher` (
   `nickName` varchar(45) NOT NULL,
   `password` varchar(256) NOT NULL,
   PRIMARY KEY (`id`),
-  unique key(`email`),
-  unique key(`nickName`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `nickName` (`nickName`),
   KEY `FK_2` (`subject`),
   CONSTRAINT `FK_6` FOREIGN KEY (`subject`) REFERENCES `subjects` (`name`),
-  CONSTRAINT `FK_10` FOREIGN KEY (`email`) REFERENCES `email-code` (`email`)
+  CONSTRAINT `teacher_ibfk_1` FOREIGN KEY (`email`) REFERENCES `email-code` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -224,5 +246,5 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-15 23:26:54
+-- Dump completed on 2022-10-22 18:50:33
 set foreign_key_checks = 1;
