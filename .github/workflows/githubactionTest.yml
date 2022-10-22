@@ -49,13 +49,6 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew clean build --stacktrace
-      - name: Deploy
-        uses: SamKirkland/FTP-Deploy-Action@4.3.2
-        with:
-         ftp-server: ${{ secrets.FTP_HOST }}
-         ftp-username: ${{ secrets.FTP_USERNAME }}
-         ftp-password: ${{ secrets.FTP_PASSWORD }}
-         local-dir: ./build/
       - name: deploy file
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
