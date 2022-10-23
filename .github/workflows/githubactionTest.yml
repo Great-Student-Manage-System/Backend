@@ -44,8 +44,8 @@ jobs:
         run: sudo mysql great < ./src/test/resources/schema.sql
       - name: Create application-mailKey.yml
         run: |
-              echo ${{ secrets.APPLICATION_YML}} >> ./src/main/resources/application-mailKey.yml
-              echo ${{ secrets.APPLICATION_TEST_YML}} >> ./src/test/resources/application-mailKey.yml
+              echo -e "${{ secrets.APPLICATION_YML}}" >> ./src/main/resources/application-mailKey.yml
+              echo -e "${{ secrets.APPLICATION_TEST_YML}}" >> ./src/test/resources/application-mailKey.yml
 
       - name: Build with Gradle
         run: ./gradlew clean build --stacktrace
