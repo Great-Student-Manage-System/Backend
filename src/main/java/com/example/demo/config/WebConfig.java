@@ -62,6 +62,7 @@ public class WebConfig implements WebMvcConfigurer {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
+        mailSender.setDefaultEncoding("UTF-8");
 
         mailSender.setUsername("greatemailverify@gmail.com");
         mailSender.setPassword(mailKey);
