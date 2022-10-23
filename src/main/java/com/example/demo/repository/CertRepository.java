@@ -12,4 +12,6 @@ public interface CertRepository {
 
     boolean isCert(Email email);
 
+    boolean checkNickName(String nickName);
+
 }

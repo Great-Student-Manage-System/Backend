@@ -17,6 +17,8 @@ public interface JoinService {
      */
     void checkEmail(Email email);
 
+    void checkNickName(String nickName);
+
     /**
      * 이메일 인증을 위한 인증코드를 생성합니다.
      * @param email 인증코드를 생성하고싶은 이메일

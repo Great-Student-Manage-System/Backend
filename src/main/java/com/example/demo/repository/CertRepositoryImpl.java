@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.Email;
+import com.example.demo.model.dto.response.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -56,6 +57,17 @@ public class CertRepositoryImpl implements CertRepository {
             return result == 1;
         }catch (NullPointerException e){
             return false;
+        }
+    }
+
+    @Override
+    public boolean checkNickName(String nickName) {
+        String sql = "select count(nickName) from teacher where nickName = ?";
+        Integer count = jdbcTemplate.queryForObject(sql,Integer.class,nickName);
+        if(count==null || count != 0){
+            return false;
+        }else {
+            return true;
         }
     }
 }

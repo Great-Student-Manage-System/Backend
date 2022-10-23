@@ -34,7 +34,17 @@ public class JoinServiceImpl implements JoinService {
             ErrorMessage errorMessage = ErrorMessage.builder()
                     .message("이미 사용중인 이메일입니다.")
                     .code(409)
-                    .method(HttpMethod.GET)
+                    .build();
+            throw new SystemException(errorMessage);
+        }
+    }
+
+    @Override
+    public void checkNickName(String nickName) {
+        if(!certRepository.checkNickName(nickName)){
+            ErrorMessage errorMessage = ErrorMessage.builder()
+                    .message("이미 사용중인 닉네임입니다.")
+                    .code(409)
                     .build();
             throw new SystemException(errorMessage);
         }
