@@ -39,3 +39,5 @@ out/
 
 ### GMAIL key ###
 application-mailKey.yml
+
+/application_log
