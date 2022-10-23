@@ -2,6 +2,7 @@ package com.example.demo.config;
 
 
 import com.example.demo.interceptor.AuthInterceptor;
+import com.example.demo.interceptor.LoggingInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -38,7 +39,11 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor())
                 .addPathPatterns("/api/**")
-                .excludePathPatterns("/api/members/login","/api/members/join/**");
+                .excludePathPatterns("/api/members/login","/api/members/join/**")
+                .order(2);
+        registry.addInterceptor(loggingInterceptor())
+                .addPathPatterns("/api/**")
+                .order(1);
     }
 
     @Bean
@@ -56,6 +61,9 @@ public class WebConfig implements WebMvcConfigurer {
     public AuthInterceptor authInterceptor(){
         return new AuthInterceptor();
     }
+
+    @Bean
+    LoggingInterceptor loggingInterceptor(){return new LoggingInterceptor();}
 
     @Bean
     public JavaMailSender getJavaMailSender() {
