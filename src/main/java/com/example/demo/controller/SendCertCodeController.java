@@ -22,6 +22,5 @@ public class SendCertCodeController {
         String code = joinService.createEmailCode(email);
         emailService.sendEmail(email,code);
         return ResponseEntity.ok(ResponseDto.builder().code(200).response("인증번호가 메일로 발송되었습니다.").build());
-
     }
 }
