@@ -32,6 +32,8 @@ public class LoginController {
         cookie.setHttpOnly(true);
         cookie.setMaxAge(14*24*60*60);
         response.addCookie(cookie);
+        Cookie cookie1 = new Cookie("test","test");
+        response.addCookie(cookie1);
         LoginResponseDto responseDto = new LoginResponseDto(tokens.getAccessTokenString());
         ResponseDto<LoginResponseDto> result = ResponseDto.<LoginResponseDto>builder()
                 .response("로그인에 성공하였습니다.")
