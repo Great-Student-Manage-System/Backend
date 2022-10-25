@@ -33,6 +33,7 @@ public class TokenRemakeController {
         refreshTokenString = Base64.getEncoder().encodeToString(refreshTokenString.getBytes());
         Cookie cookie = new Cookie("refreshToken",refreshTokenString);
         cookie.setHttpOnly(true);
+        cookie.setDomain("http://localhost:3000");
         cookie.setMaxAge(14*24*60*60);
         response.addCookie(cookie);
         LoginResponseDto responseDto = new LoginResponseDto(tokens.getAccessTokenString());
