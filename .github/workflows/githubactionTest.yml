@@ -48,7 +48,7 @@ jobs:
               echo -e "${{ secrets.APPLICATION_TEST_YML}}" >> ./src/test/resources/application-mailKey.yml
       - name: Generate Keystore file from Github Secrets
         run: |
-              echo "${{ secrets.KEYSTORE}}" > ./src/main/resources/keystore.p12
+              echo -e "${{ secrets.KEYSTORE}}" > ./src/main/resources/keystore.p12
 
       - name: Build with Gradle
         run: ./gradlew clean build --stacktrace
