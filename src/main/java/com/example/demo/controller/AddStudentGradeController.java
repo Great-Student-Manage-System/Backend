@@ -14,7 +14,7 @@ public class AddStudentGradeController {
     @Autowired
     private StudentRecordService studentRecordService;
 
-    @PostMapping("/api/studests/exam/result")
+    @PostMapping("/api/students/exam/result")
     public ResponseEntity<ResponseDto<?>> addStudentRecord(@RequestBody AddRecordDto dto){
             studentRecordService.addStudentRecord(dto);
             return ResponseEntity.ok(ResponseDto.builder().code(201).response("성적이 추가되었습니다.").build());
