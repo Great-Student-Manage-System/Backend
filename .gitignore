@@ -43,3 +43,4 @@ application-mailKey.yml
 /application_log
 application.log.**.gz
 *.p12
+key.text
