@@ -36,6 +36,7 @@ public class ExamRepositoryImpl implements ExamRepository {
             return SelectExamResponseDto.builder()
                     .examId(rs.getInt("id"))
                     .examName(rs.getString("name"))
+                    .examDate(rs.getDate("examDate"))
                     .subject(rs.getString("subject"))
                     .schoolYear(rs.getInt("schoolYear"))
                     .gradeCut(arr)
@@ -51,6 +52,7 @@ public class ExamRepositoryImpl implements ExamRepository {
                 .examId(rs.getInt("id"))
                 .schoolYear(rs.getInt("schoolYear"))
                 .examName(rs.getString("name"))
+                .examDate(rs.getDate("examDate"))
                 .subject(rs.getString("subject"))
                 .schoolYear(rs.getInt("schoolYear")).build(),year.getYear());
         return new SelectExamsResponseDto(result);
