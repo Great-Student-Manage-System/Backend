@@ -54,6 +54,12 @@ public class StudentRepositoryImpl implements StudentRepository {
         return jdbcTemplate.query(sql,new SelectStudentResponseDtoRowMapper<>(), teacherId, (page-1)*10,10);
     }
 
+    @Override
+    public List<SelectStudentResponseDto> findByTeacherAndExam(int teacherId, int examId) {
+        String sql = "select * from student join record on record.student = student.id where record.exam = ? and student.teacher = ?";
+        return jdbcTemplate.query(sql,new SelectStudentResponseDtoRowMapper<>(), examId, teacherId);
+    }
+
     private class SelectStudentResponseDtoRowMapper<T extends SelectStudentResponseDto> implements RowMapper<T>{
 
         @Override

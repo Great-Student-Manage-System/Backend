@@ -14,4 +14,5 @@ public interface StudentRepository {
     List<SelectStudentResponseDto> findBySubject(String subject); //세부 과목 리스트 기준으로 학생들 불러오기
     List<SelectStudentResponseDto> findBySchool(String school);
     List<SelectStudentResponseDto> findByTeacher(int teacherId, int page);
+    List<SelectStudentResponseDto> findByTeacherAndExam(int teacherId, int examId);
 }

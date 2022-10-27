@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
 import com.example.demo.model.dto.request.AddStudentDto;
+import com.example.demo.model.dto.response.SelectStudentResponseDto;
 import com.example.demo.model.dto.response.SelectStudentsResponseDto;
+
+import java.util.List;
 
 /**
  * 학생을 다루는 Service 계층의 인터페이스 입니다.
@@ -14,6 +17,8 @@ public interface StudentService {
      * @return 학생 정보들
      */
     SelectStudentsResponseDto getStudents(int teacherId, int page);
+
+    List<SelectStudentResponseDto> getTakingExamStudents(int teacherId, int examId);
 
     /**
      * 특정 선생님이 가르치는 학생을 추가합니다.

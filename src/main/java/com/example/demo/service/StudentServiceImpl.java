@@ -21,6 +21,11 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
+    public List<SelectStudentResponseDto> getTakingExamStudents(int teacherId, int examId) {
+        return studentRepository.findByTeacherAndExam(teacherId, examId);
+    }
+
+    @Override
     public void addStudent(int teacherId,AddStudentDto student) {
         studentRepository.save(teacherId,student);
     }
