@@ -220,7 +220,7 @@ public class ServiceTest {
     @Order(15)
     @Test
     void getExamTest(){
-        SelectExamsResponseDto results = examService.getExams(LocalDate.now());
+        SelectExamsResponseDto results = examService.getExams(2,LocalDate.now());
         List<ExamDto> list = results.getData();
         int realExamCount = list.size();
         Assertions.assertThat(realExamCount).isEqualTo(2);

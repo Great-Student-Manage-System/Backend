@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface ExamRepository {
     void save(AddExamDto dto);
     Optional<SelectExamResponseDto> findById(int examId);
-    SelectExamsResponseDto findByYear(LocalDate year);
+    SelectExamsResponseDto findByYearAndTeacher(LocalDate year, int teacherId);
     void update(UpdateExamDto dto);
 }

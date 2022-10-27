@@ -46,15 +46,22 @@ public class ExamRepositoryImpl implements ExamRepository {
     }
 
     @Override
-    public SelectExamsResponseDto findByYear(LocalDate year) {
-        String sql = "select * from exam where Year(examDate) = ?";
+    public SelectExamsResponseDto findByYearAndTeacher(LocalDate year,int teacherId) {
+        String sql = "select exam.* from exam " +
+                "join " +
+                "(select detailSubjects.detailSubject as `subject` from detailSubjects " +
+                "join teacher " +
+                "on teacher.`subject` = detailSubjects.subject " +
+                "where teacher.`id`=?) as sub " +
+                "on exam.subject = sub.`subject` " +
+                "where Year(examDate) = ?";
         List<ExamDto> result = jdbcTemplate.query(sql, (rs, rowNum) -> ExamDto.builder()
                 .examId(rs.getInt("id"))
                 .schoolYear(rs.getInt("schoolYear"))
                 .examName(rs.getString("name"))
                 .examDate(rs.getDate("examDate"))
                 .subject(rs.getString("subject"))
-                .schoolYear(rs.getInt("schoolYear")).build(),year.getYear());
+                .schoolYear(rs.getInt("schoolYear")).build(),teacherId,year.getYear());
         return new SelectExamsResponseDto(result);
     }
 
