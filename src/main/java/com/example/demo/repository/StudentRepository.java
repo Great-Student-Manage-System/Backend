@@ -15,4 +15,5 @@ public interface StudentRepository {
     List<SelectStudentResponseDto> findBySchool(String school);
     List<SelectStudentResponseDto> findByTeacher(int teacherId, int page);
     List<SelectStudentResponseDto> findByTeacherAndExam(int teacherId, int examId);
+    int pageCountByTeacherAndMaxPage(int teacherId,int maxPage);
 }
