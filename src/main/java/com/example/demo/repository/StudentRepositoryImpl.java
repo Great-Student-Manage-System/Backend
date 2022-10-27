@@ -64,12 +64,12 @@ public class StudentRepositoryImpl implements StudentRepository {
     public int pageCountByTeacherAndMaxPage(int teacherId, int maxPage) {
         String sql ="select " +
                 "case " +
-                "when count(*)%? = 0 then count(*)%? " +
-                "when count(*)%? != 0 then count(*)%? + 1 " +
+                "when count(*)%? = 0 then count(*)/? " +
+                "when count(*)%? != 0 then count(*)/? + 1 " +
                 "when count(*) = 0 then 1 " +
                 "end as count " +
                 "from student " +
-                "where teachetId = ?";
+                "where teacher = ?";
         return jdbcTemplate.queryForObject(sql,Integer.class,maxPage,maxPage,maxPage,maxPage,teacherId);
     }
 
