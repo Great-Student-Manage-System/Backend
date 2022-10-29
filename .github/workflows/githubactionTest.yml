@@ -1,65 +1,65 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a package using Gradle and then publish it to GitHub packages when a release is created
-# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#Publishing-using-gradle
-
-name: Gradle Package
-
-on:
-  push:
-    branches: [ master,develop]
-  pull_request:
-    branches: [ master ]
-
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
-    steps:
-      - uses: ankane/setup-mariadb@v1
-      - name: Create DB, DB user, grant permission
-        run: |
-              sudo mysql -e "create database if not exists great"
-              sudo mysql -e "create user 'greatManager'@localhost identified by 'great123!@#'"
-              sudo mysql -e "grant all privileges on great.* to 'greatManager'@localhost"
-      - name: read repository
-        uses: actions/checkout@v3
-      - name: Set up JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-          settings-path: ${{ github.workspace }} # location for the settings.xml file
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-      - name: DB init
-        run: sudo mysql great < ./src/test/resources/schema.sql
-      - name: Create application-mailKey.yml
-        run: |
-              echo -e "${{ secrets.APPLICATION_YML}}" >> ./src/main/resources/application-mailKey.yml
-              echo -e "${{ secrets.APPLICATION_TEST_YML}}" >> ./src/test/resources/application-mailKey.yml
-      - name: Generate Keystore file from Github Secrets
-        run: |
-              echo -e "${{ secrets.KEYSTORE}}" > ./key
-              base64 -d -i ./key >> ./src/main/resources/keystore.p12
-
-      - name: Build with Gradle
-        run: ./gradlew clean build --stacktrace
-      - name: deploy file
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-        with:
-          username: ${{ secrets.FTP_USERNAME }}
-          server: ${{ secrets.FTP_HOST }}
-          port: ${{ secrets.FTP_PORT }}
-          local_path: './build/libs/*'
-          remote_path: '/home/j2kb'
-          sftp_only: true
-          password: ${{ secrets.FTP_PASSWORD }}
+## This workflow uses actions that are not certified by GitHub.
+## They are provided by a third-party and are governed by
+## separate terms of service, privacy policy, and support
+## documentation.
+## This workflow will build a package using Gradle and then publish it to GitHub packages when a release is created
+## For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#Publishing-using-gradle
+#
+#name: Gradle Package
+#
+#on:
+#  push:
+#    branches: [ master,develop]
+#  pull_request:
+#    branches: [ master ]
+#
+#jobs:
+#  build:
+#
+#    runs-on: ubuntu-latest
+#    permissions:
+#      contents: read
+#      packages: write
+#
+#    steps:
+#      - uses: ankane/setup-mariadb@v1
+#      - name: Create DB, DB user, grant permission
+#        run: |
+#              sudo mysql -e "create database if not exists great"
+#              sudo mysql -e "create user 'greatManager'@localhost identified by 'great123!@#'"
+#              sudo mysql -e "grant all privileges on great.* to 'greatManager'@localhost"
+#      - name: read repository
+#        uses: actions/checkout@v3
+#      - name: Set up JDK 11
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: '11'
+#          distribution: 'temurin'
+#          server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+#          settings-path: ${{ github.workspace }} # location for the settings.xml file
+#
+#      - name: Grant execute permission for gradlew
+#        run: chmod +x gradlew
+#      - name: DB init
+#        run: sudo mysql great < ./src/test/resources/schema.sql
+#      - name: Create application-mailKey.yml
+#        run: |
+#              echo -e "${{ secrets.APPLICATION_YML}}" >> ./src/main/resources/application-mailKey.yml
+#              echo -e "${{ secrets.APPLICATION_TEST_YML}}" >> ./src/test/resources/application-mailKey.yml
+#      - name: Generate Keystore file from Github Secrets
+#        run: |
+#              echo -e "${{ secrets.KEYSTORE}}" > ./key
+#              base64 -d -i ./key >> ./src/main/resources/keystore.p12
+#
+#      - name: Build with Gradle
+#        run: ./gradlew clean build --stacktrace
+#      - name: deploy file
+#        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+#        with:
+#          username: ${{ secrets.FTP_USERNAME }}
+#          server: ${{ secrets.FTP_HOST }}
+#          port: ${{ secrets.FTP_PORT }}
+#          local_path: './build/libs/*'
+#          remote_path: '/home/j2kb'
+#          sftp_only: true
+#          password: ${{ secrets.FTP_PASSWORD }}
