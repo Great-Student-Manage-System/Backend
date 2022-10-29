@@ -1,8 +1,10 @@
 package com.example.demo.config;
 
 
+import com.example.demo.exception.SystemException;
 import com.example.demo.interceptor.AuthInterceptor;
 import com.example.demo.interceptor.LoggingInterceptor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -22,16 +24,17 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+@Slf4j
 public class WebConfig implements WebMvcConfigurer {
     @Autowired
     private DataSource dataSource;
-    @Value("${mail}")
+    @Value("${mailKey}")
     private String mailKey;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")
+                .allowedOrigins("http://localhost:3000","https://greaplus.netlify.app")
                 .allowedMethods("*")
                 .allowCredentials(true);
     }
@@ -79,7 +82,7 @@ public class WebConfig implements WebMvcConfigurer {
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.timeout", 5000);
+        props.put("mail.smtp.timeout", 500000);
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.debug", "true");
 
