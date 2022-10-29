@@ -27,4 +27,6 @@ public interface StudentService {
      * @param student 학생 정보
      */
     void addStudent(int teacherId, AddStudentDto student);
+
+    void deleteStudent(int teacherId, int studentId);
 }

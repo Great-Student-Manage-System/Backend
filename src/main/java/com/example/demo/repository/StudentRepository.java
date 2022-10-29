@@ -17,4 +17,5 @@ public interface StudentRepository {
     List<SelectStudentResponseDto> findByTeacher(int teacherId, int page);
     List<StudentWithExamScore> findByTeacherAndExam(int teacherId, int examId);
     int pageCountByTeacherAndMaxPage(int teacherId,int maxPage);
+    void deleteStudent(int teacherId, int studentId);
 }

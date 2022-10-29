@@ -81,7 +81,13 @@ public class StudentRepositoryImpl implements StudentRepository {
         return jdbcTemplate.queryForObject(sql,Integer.class,maxPage,maxPage,maxPage,maxPage,teacherId);
     }
 
-    private class SelectStudentResponseDtoRowMapper<T extends SelectStudentResponseDto> implements RowMapper<T>{
+    @Override
+    public void deleteStudent(int teacherId, int studentId) {
+        String sql = "delete from student where teacher = ? and id = ?";
+        jdbcTemplate.update(sql,teacherId,studentId);
+    }
+
+    private static class SelectStudentResponseDtoRowMapper<T extends SelectStudentResponseDto> implements RowMapper<T>{
 
         @Override
         public T mapRow(ResultSet rs, int rowNum) throws SQLException {

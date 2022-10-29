@@ -18,7 +18,7 @@ public class StudentServiceImpl implements StudentService{
     private StudentRepository studentRepository;
     @Override
     public SelectStudentsResponseDto getStudents(int teacherId, int page) {
-        int maxPage = 1; //ToDo 최대 페이지 구현 필요
+        int maxPage;
         try{
             maxPage = studentRepository.pageCountByTeacherAndMaxPage(teacherId,10);
         }catch (Exception e){
@@ -37,5 +37,10 @@ public class StudentServiceImpl implements StudentService{
     @Override
     public void addStudent(int teacherId,AddStudentDto student) {
         studentRepository.save(teacherId,student);
+    }
+
+    @Override
+    public void deleteStudent(int teacherId, int studentId) {
+        studentRepository.deleteStudent(teacherId,studentId);
     }
 }
