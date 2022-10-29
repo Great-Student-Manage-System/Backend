@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.dto.request.AddStudentDto;
+import com.example.demo.model.dto.request.UpdateStudentDto;
 import com.example.demo.model.dto.response.SelectStudentResponseDto;
 import com.example.demo.model.dto.response.SelectStudentsResponseDto;
 import com.example.demo.model.dto.response.StudentWithExamScore;
@@ -42,5 +43,10 @@ public class StudentServiceImpl implements StudentService{
     @Override
     public void deleteStudent(int teacherId, int studentId) {
         studentRepository.deleteStudent(teacherId,studentId);
+    }
+
+    @Override
+    public void updateStudent(int teacherId, UpdateStudentDto student) {
+        studentRepository.updateStudent(teacherId, student);
     }
 }
