@@ -8,11 +8,8 @@ import com.example.demo.model.dto.request.UpdateTeacherDto;
 import com.example.demo.model.dto.response.SelectTeacherResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Optional;
 @Repository
 public class TeacherRepositoryImpl implements TeacherRepository {
@@ -21,7 +18,7 @@ public class TeacherRepositoryImpl implements TeacherRepository {
     @Override
     public void save(JoinDto teacher) {
         String sql = "insert into teacher(email,subject,nickName,password) values(?,?,?,sha2(?,256))";
-        jdbcTemplate.update(sql,teacher.getEmail(),teacher.getSubject(),teacher.getNickName(),teacher.getPassword());
+        jdbcTemplate.update(sql, teacher.getEmail(), teacher.getSubject(), teacher.getNickName(), teacher.getPassword());
     }
 
     @Override

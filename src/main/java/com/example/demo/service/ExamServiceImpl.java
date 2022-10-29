@@ -17,8 +17,8 @@ public class ExamServiceImpl implements ExamService {
     @Autowired
     private ExamRepository examRepository;
     @Override
-    public SelectExamsResponseDto getExams(LocalDate year) {
-        return examRepository.findByYear(year);
+    public SelectExamsResponseDto getExams(int teacherId,LocalDate year) {
+        return examRepository.findByYearAndTeacher(year,teacherId);
     }
 
     @Override

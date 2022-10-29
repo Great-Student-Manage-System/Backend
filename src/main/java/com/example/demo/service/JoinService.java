@@ -10,12 +10,8 @@ import com.example.demo.model.dto.response.SelectTeacherResponseDto;
  * 회원가입과 관련된 로직을 처리하는 Service 계층의 인터페이스 입니다.
  */
 public interface JoinService {
-    /**
-     * 현재 가입되어있는 이메일인지 확인합니다.
-     * @param email 가입여부를 확인하고싶은 이메일
-     * @throws com.example.demo.exception.SystemException 이미 가입된 이메일인 경우
-     */
-    void checkEmail(Email email);
+
+    void checkNickName(String nickName);
 
     /**
      * 이메일 인증을 위한 인증코드를 생성합니다.

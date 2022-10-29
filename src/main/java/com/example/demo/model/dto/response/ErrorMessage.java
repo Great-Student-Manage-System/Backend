@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.Setter;
 import org.springframework.http.HttpMethod;
 
+import java.util.UUID;
+
 /**
  * 각종 요청을 정상적으로 처리하지 못했을 때 응답으로 사용하는 클래스 입니다.
  */
@@ -17,4 +19,6 @@ public class ErrorMessage {
     private String path;
     @Setter
     private HttpMethod method;
+    @Builder.Default
+    private String uuid = UUID.randomUUID().toString();
 }

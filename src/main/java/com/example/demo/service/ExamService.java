@@ -14,7 +14,7 @@ public interface ExamService {
      * @param year 조회하고자 하는 연도
      * @return
      */
-    SelectExamsResponseDto getExams(LocalDate year);
+    SelectExamsResponseDto getExams(int teacherId,LocalDate year);
 
     /**
      * 특정 시험의 정보를 조회합니다

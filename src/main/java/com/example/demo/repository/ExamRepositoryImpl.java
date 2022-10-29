@@ -7,11 +7,8 @@ import com.example.demo.model.dto.response.SelectExamResponseDto;
 import com.example.demo.model.dto.response.SelectExamsResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +36,7 @@ public class ExamRepositoryImpl implements ExamRepository {
             return SelectExamResponseDto.builder()
                     .examId(rs.getInt("id"))
                     .examName(rs.getString("name"))
+                    .examDate(rs.getDate("examDate"))
                     .subject(rs.getString("subject"))
                     .schoolYear(rs.getInt("schoolYear"))
                     .gradeCut(arr)
@@ -48,14 +46,22 @@ public class ExamRepositoryImpl implements ExamRepository {
     }
 
     @Override
-    public SelectExamsResponseDto findByYear(LocalDate year) {
-        String sql = "select * from exam where Year(examDate) = ?";
+    public SelectExamsResponseDto findByYearAndTeacher(LocalDate year,int teacherId) {
+        String sql = "select exam.* from exam " +
+                "join " +
+                "(select detailSubjects.detailSubject as `subject` from detailSubjects " +
+                "join teacher " +
+                "on teacher.`subject` = detailSubjects.subject " +
+                "where teacher.`id`=?) as sub " +
+                "on exam.subject = sub.`subject` " +
+                "where Year(examDate) = ?";
         List<ExamDto> result = jdbcTemplate.query(sql, (rs, rowNum) -> ExamDto.builder()
                 .examId(rs.getInt("id"))
                 .schoolYear(rs.getInt("schoolYear"))
                 .examName(rs.getString("name"))
+                .examDate(rs.getDate("examDate"))
                 .subject(rs.getString("subject"))
-                .schoolYear(rs.getInt("schoolYear")).build(),year.getYear());
+                .schoolYear(rs.getInt("schoolYear")).build(),teacherId,year.getYear());
         return new SelectExamsResponseDto(result);
     }
 

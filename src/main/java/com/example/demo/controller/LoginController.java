@@ -8,6 +8,7 @@ import com.example.demo.model.dto.response.ResponseDto;
 import com.example.demo.token.TokenManager;
 import com.example.demo.token.Tokens;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,10 +29,9 @@ public class LoginController {
         Tokens tokens= tokenManager.makeTokens(email,password);
         String refreshToken = tokens.getRefreshTokenString();
         refreshToken = Base64.getEncoder().encodeToString(refreshToken.getBytes());
-        Cookie cookie = new Cookie("refreshToken",refreshToken);
-        cookie.setHttpOnly(true);
-        cookie.setMaxAge(14*24*60*60);
-        response.addCookie(cookie);
+        ResponseCookie responseCookie = ResponseCookie.from("refreshToken",refreshToken)
+                .httpOnly(true).maxAge(14*24*60*60).sameSite("None").secure(true).path("/").build();
+        response.addHeader("Set-Cookie",responseCookie.toString());
         LoginResponseDto responseDto = new LoginResponseDto(tokens.getAccessTokenString());
         ResponseDto<LoginResponseDto> result = ResponseDto.<LoginResponseDto>builder()
                 .response("로그인에 성공하였습니다.")

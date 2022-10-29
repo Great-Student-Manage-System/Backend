@@ -5,6 +5,7 @@ import com.example.demo.model.Email;
 import com.example.demo.model.Password;
 import com.example.demo.model.dto.request.*;
 import com.example.demo.model.dto.response.*;
+import com.example.demo.repository.TeacherRepositoryImpl;
 import com.example.demo.service.*;
 import com.example.demo.token.TokenManager;
 import com.example.demo.token.Tokens;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -36,6 +38,10 @@ public class ServiceTest {
     StudentService studentService;
     @Autowired
     TokenManager tokenManager;
+    @Autowired
+    TeacherRepositoryImpl teacherRepository;
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     ObjectMapper objectMapper = new ObjectMapper();
     static AddExamDto addExamDto;
@@ -111,6 +117,12 @@ public class ServiceTest {
 //                "  ],\n" +
 //                "  \"subject\": \"물리1\"\n" +
 //                "}",UpdateExamDto.class);
+    }
+    @Order(2)
+    @Test
+    void addCertCode(){
+        joinService.createEmailCode(new Email(joinDto.getEmail()));
+        jdbcTemplate.update("update `email-code` set verify = true where email = ?",joinDto.getEmail());
     }
 
     @Order(2)
@@ -208,7 +220,7 @@ public class ServiceTest {
     @Order(15)
     @Test
     void getExamTest(){
-        SelectExamsResponseDto results = examService.getExams(LocalDate.now());
+        SelectExamsResponseDto results = examService.getExams(2,LocalDate.now());
         List<ExamDto> list = results.getData();
         int realExamCount = list.size();
         Assertions.assertThat(realExamCount).isEqualTo(2);

@@ -2,8 +2,8 @@ package com.example.demo.token;
 
 import com.example.demo.exception.SystemException;
 import com.example.demo.model.Email;
-import com.example.demo.model.dto.response.ErrorMessage;
 import com.example.demo.model.Password;
+import com.example.demo.model.dto.response.ErrorMessage;
 import com.example.demo.model.dto.response.SelectTeacherResponseDto;
 import com.example.demo.repository.TeacherRepository;
 import io.jsonwebtoken.*;
