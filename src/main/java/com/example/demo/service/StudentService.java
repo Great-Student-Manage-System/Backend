@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.dto.request.AddStudentDto;
 import com.example.demo.model.dto.response.SelectStudentResponseDto;
 import com.example.demo.model.dto.response.SelectStudentsResponseDto;
+import com.example.demo.model.dto.response.StudentWithExamScore;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface StudentService {
      */
     SelectStudentsResponseDto getStudents(int teacherId, int page);
 
-    List<SelectStudentResponseDto> getTakingExamStudents(int teacherId, int examId);
+    List<StudentWithExamScore> getTakingExamStudents(int teacherId, int examId);
 
     /**
      * 특정 선생님이 가르치는 학생을 추가합니다.

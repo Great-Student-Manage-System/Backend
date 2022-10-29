@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.model.dto.request.AddStudentDto;
 import com.example.demo.model.dto.response.SelectStudentResponseDto;
+import com.example.demo.model.dto.response.StudentWithExamScore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -55,9 +56,16 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
-    public List<SelectStudentResponseDto> findByTeacherAndExam(int teacherId, int examId) {
+    public List<StudentWithExamScore> findByTeacherAndExam(int teacherId, int examId) {
         String sql = "select * from student join record on record.student = student.id where record.exam = ? and student.teacher = ?";
-        return jdbcTemplate.query(sql,new SelectStudentResponseDtoRowMapper<>(), examId, teacherId);
+        return jdbcTemplate.query(sql, (rs, rowNum) -> StudentWithExamScore.builder()
+                .studentId(rs.getInt("id"))
+                .schoolYear(rs.getInt("grade"))
+                .name(rs.getString("name"))
+                .school(rs.getString("school"))
+                .subjects(rs.getString("subjects"))
+                .examScore(rs.getInt("score"))
+                .build(), examId, teacherId);
     }
 
     @Override

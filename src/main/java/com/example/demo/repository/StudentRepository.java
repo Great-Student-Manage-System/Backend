@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import com.example.demo.model.dto.request.AddStudentDto;
 import com.example.demo.model.dto.response.SelectStudentResponseDto;
+import com.example.demo.model.dto.response.StudentWithExamScore;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,6 @@ public interface StudentRepository {
     List<SelectStudentResponseDto> findBySubject(String subject); //세부 과목 리스트 기준으로 학생들 불러오기
     List<SelectStudentResponseDto> findBySchool(String school);
     List<SelectStudentResponseDto> findByTeacher(int teacherId, int page);
-    List<SelectStudentResponseDto> findByTeacherAndExam(int teacherId, int examId);
+    List<StudentWithExamScore> findByTeacherAndExam(int teacherId, int examId);
     int pageCountByTeacherAndMaxPage(int teacherId,int maxPage);
 }

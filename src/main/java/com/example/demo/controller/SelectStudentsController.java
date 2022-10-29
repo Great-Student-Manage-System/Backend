@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.dto.response.ResponseDto;
 import com.example.demo.model.dto.response.SelectStudentResponseDto;
 import com.example.demo.model.dto.response.SelectStudentsResponseDto;
+import com.example.demo.model.dto.response.StudentWithExamScore;
 import com.example.demo.service.StudentService;
 import com.example.demo.token.AccessToken;
 import com.example.demo.token.TokenManager;
@@ -38,8 +39,8 @@ public class SelectStudentsController {
     public ResponseEntity<ResponseDto<?>> getTakingExamStudentList(@RequestHeader("Authorization") String accessTokenString,@PathVariable int examId){
         AccessToken accessToken = new AccessToken(accessTokenString);
         int teacherId = tokenManager.getIdFromAccessToken(accessToken);
-        List<SelectStudentResponseDto> result = studentService.getTakingExamStudents(teacherId,examId);
-        ResponseDto<List<SelectStudentResponseDto>> responseDto = ResponseDto.<List<SelectStudentResponseDto>>builder()
+        List<StudentWithExamScore> result = studentService.getTakingExamStudents(teacherId,examId);
+        ResponseDto<List<StudentWithExamScore>> responseDto = ResponseDto.<List<StudentWithExamScore>>builder()
                 .data(result)
                 .response("학생 목록 조회에 성공했습니다")
                 .code(200).build();

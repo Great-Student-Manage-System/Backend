@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.dto.request.AddStudentDto;
 import com.example.demo.model.dto.response.SelectStudentResponseDto;
 import com.example.demo.model.dto.response.SelectStudentsResponseDto;
+import com.example.demo.model.dto.response.StudentWithExamScore;
 import com.example.demo.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public List<SelectStudentResponseDto> getTakingExamStudents(int teacherId, int examId) {
+    public List<StudentWithExamScore> getTakingExamStudents(int teacherId, int examId) {
         return studentRepository.findByTeacherAndExam(teacherId, examId);
     }
 
