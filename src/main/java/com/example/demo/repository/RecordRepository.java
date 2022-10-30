@@ -11,4 +11,5 @@ public interface RecordRepository {
     List<SelectRecordResponseDto> findByRecordSelectDto(int StudentId, String subject, int year);
     List<SelectRecordResponseDto> findByExamId(int examId);
     void update (UpdateRecordDto dto);
+    void delete(int recordId);
 }
