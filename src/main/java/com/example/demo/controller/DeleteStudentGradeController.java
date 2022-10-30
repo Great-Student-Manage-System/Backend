@@ -15,7 +15,7 @@ public class DeleteStudentGradeController {
 
     @DeleteMapping("/api/students/exam/result/{recordId}")
     public ResponseEntity<ResponseDto<?>> addStudentRecord(@PathVariable int recordId){
-            studentRecordService.deleteStudentRecord(recordId); //Todo 자신이 가르치는 학생이 아닌 사람의 성적을 삭제하지 못하도록 검증 필요
-            return ResponseEntity.ok(ResponseDto.builder().code(201).response("성적이 삭제되었습니다.").build());
+            studentRecordService.deleteStudentRecord(recordId); //Todo 자신이 가르치는 학생이 아닌 사람의 성적을 삭제하지 못하도록 검증 필제
+            return ResponseEntity.ok(ResponseDto.builder().code(200).response("성적이 삭제되었습니다.").build());
     }
 }
