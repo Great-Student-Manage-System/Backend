@@ -31,4 +31,5 @@ public interface StudentRecordService {
      * @param updateRecordDto 성적정보
      */
     void updateStudentRecord(UpdateRecordDto updateRecordDto);
+    void deleteStudentRecord(int recordId);
 }

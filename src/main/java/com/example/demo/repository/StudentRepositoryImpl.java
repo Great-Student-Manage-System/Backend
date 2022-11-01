@@ -1,7 +1,9 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.dto.request.AddStudentDto;
+import com.example.demo.model.dto.request.UpdateStudentDto;
 import com.example.demo.model.dto.response.SelectStudentResponseDto;
+import com.example.demo.model.dto.response.StudentWithExamScore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -55,9 +57,16 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
-    public List<SelectStudentResponseDto> findByTeacherAndExam(int teacherId, int examId) {
+    public List<StudentWithExamScore> findByTeacherAndExam(int teacherId, int examId) {
         String sql = "select * from student join record on record.student = student.id where record.exam = ? and student.teacher = ?";
-        return jdbcTemplate.query(sql,new SelectStudentResponseDtoRowMapper<>(), examId, teacherId);
+        return jdbcTemplate.query(sql, (rs, rowNum) -> StudentWithExamScore.builder()
+                .studentId(rs.getInt("id"))
+                .schoolYear(rs.getInt("grade"))
+                .name(rs.getString("name"))
+                .school(rs.getString("school"))
+                .subjects(rs.getString("subjects"))
+                .examScore(rs.getInt("score"))
+                .build(), examId, teacherId);
     }
 
     @Override
@@ -73,7 +82,33 @@ public class StudentRepositoryImpl implements StudentRepository {
         return jdbcTemplate.queryForObject(sql,Integer.class,maxPage,maxPage,maxPage,maxPage,teacherId);
     }
 
-    private class SelectStudentResponseDtoRowMapper<T extends SelectStudentResponseDto> implements RowMapper<T>{
+    @Override
+    public void deleteStudent(int teacherId, int studentId) {
+        String sql = "delete from student where teacher = ? and id = ?";
+        jdbcTemplate.update(sql,teacherId,studentId);
+    }
+
+    @Override
+    public void updateStudent(int teacherId, UpdateStudentDto student) {
+        String sql = "update student set name =? where id = ?";
+        if(student.getName()!=null){
+            jdbcTemplate.update(sql,student.getName(),student.getId());
+        }
+        if(student.getSchool()!=null){
+            sql = "update student set school =? where id = ?";
+            jdbcTemplate.update(sql,student.getSchool(),student.getId());
+        }
+        if(student.getSubjects()!=null){
+            sql = "update student set subjects =? where id = ?";
+            jdbcTemplate.update(sql,student.getSubjects(),student.getId());
+        }
+        if (student.getSchoolYear()!=0){
+            sql = "update student set grade =? where id = ?";
+            jdbcTemplate.update(sql,student.getSchoolYear(),student.getId());
+        }
+    }
+
+    private static class SelectStudentResponseDtoRowMapper<T extends SelectStudentResponseDto> implements RowMapper<T>{
 
         @Override
         public T mapRow(ResultSet rs, int rowNum) throws SQLException {

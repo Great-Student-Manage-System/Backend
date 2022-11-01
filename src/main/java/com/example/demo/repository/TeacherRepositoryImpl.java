@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 @Repository
 public class TeacherRepositoryImpl implements TeacherRepository {
@@ -60,12 +61,13 @@ public class TeacherRepositoryImpl implements TeacherRepository {
     @Override
     public Optional<SelectTeacherResponseDto> findByEmailPassword(Email email, Password password) {
         String sql = "select * from teacher where email =? and password = sha2(?,256)";
-        SelectTeacherResponseDto result = jdbcTemplate.queryForObject(sql, (rs, rowNum) -> SelectTeacherResponseDto.builder()
+        List<SelectTeacherResponseDto> results = jdbcTemplate.query(sql, (rs, rowNum) -> SelectTeacherResponseDto.builder()
                 .id(rs.getInt("id"))
                 .email(rs.getString("email"))
                 .nickName(rs.getString("nickName"))
                 .subject(rs.getString("subject"))
                 .build(),email.toString(),password.toString());
+        SelectTeacherResponseDto result = results.isEmpty()?null:results.get(0);
         return Optional.ofNullable(result);
     }
 }

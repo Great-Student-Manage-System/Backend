@@ -50,4 +50,9 @@ public class StudentRecordServiceImpl implements StudentRecordService{
             throw new SystemException(errorMessage);
         }
     }
+
+    @Override
+    public void deleteStudentRecord(int recordId) {
+        recordRepository.delete(recordId);
+    }
 }

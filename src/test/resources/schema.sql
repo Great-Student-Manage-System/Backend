@@ -135,7 +135,7 @@ CREATE TABLE `record` (
   KEY `FK_2` (`student`),
   KEY `FK_3` (`exam`),
   KEY `FK_4` (`detailSubject`),
-  CONSTRAINT `FK_2` FOREIGN KEY (`student`) REFERENCES `student` (`id`),
+  CONSTRAINT `FK_2` FOREIGN KEY (`student`) REFERENCES `student` (`id`) on delete CASCADE on update CASCADE,
   CONSTRAINT `FK_3` FOREIGN KEY (`exam`) REFERENCES `exam` (`id`),
   CONSTRAINT `FK_6_1` FOREIGN KEY (`detailSubject`) REFERENCES `detailSubjects` (`detailSubject`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;

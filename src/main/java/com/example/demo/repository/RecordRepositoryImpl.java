@@ -49,6 +49,12 @@ public class RecordRepositoryImpl implements RecordRepository {
         }
     }
 
+    @Override
+    public void delete(int recordId) {
+        String sql = "delete from record where id = ?";
+        jdbcTemplate.update(sql,recordId);
+    }
+
     private static class SelectRecordResponseDtoRowMapper<T extends SelectRecordResponseDto> implements RowMapper<T>{
         @Override
         public T mapRow(ResultSet rs, int rowNum) throws SQLException {
