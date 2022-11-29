@@ -1,3 +1,4 @@
+/*
 package com.example.demo.controller;
 
 import com.example.demo.model.Email;
@@ -24,3 +25,4 @@ public class SendCertCodeController {
         return ResponseEntity.ok(ResponseDto.builder().code(200).response("인증번호가 메일로 발송되었습니다.").build());
     }
 }
+*/

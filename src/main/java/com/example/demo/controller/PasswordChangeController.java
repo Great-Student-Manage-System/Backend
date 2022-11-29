@@ -1,3 +1,4 @@
+/*
 package com.example.demo.controller;
 
 import com.example.demo.model.dto.request.UpdatePasswordDto;
@@ -19,3 +20,4 @@ public class PasswordChangeController {
         return ResponseEntity.ok(ResponseDto.builder().code(200).response("비밀번호 변경에 성공하였습니다.").build());
     }
 }
+*/

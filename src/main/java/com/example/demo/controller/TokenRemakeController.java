@@ -1,3 +1,4 @@
+/*
 package com.example.demo.controller;
 
 import com.example.demo.model.dto.request.RemakeAccessTokenDto;
@@ -44,3 +45,4 @@ public class TokenRemakeController {
         return ResponseEntity.ok(result);
     }
 }
+*/

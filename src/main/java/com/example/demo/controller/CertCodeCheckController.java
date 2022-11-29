@@ -1,3 +1,4 @@
+/*
 package com.example.demo.controller;
 
 import com.example.demo.model.Email;
@@ -20,3 +21,4 @@ public class CertCodeCheckController {
         return ResponseEntity.ok(ResponseDto.builder().response("이메일 인증이 완료되었습니다.").code(200).build());
     }
 }
+*/

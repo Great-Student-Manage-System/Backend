@@ -1,3 +1,4 @@
+/*
 package com.example.demo.controller;
 
 import com.example.demo.model.dto.response.ResponseDto;
@@ -18,3 +19,4 @@ public class NickNameCheckController {
         return ResponseEntity.ok(ResponseDto.builder().response("사용가능한 닉네입입니다.").code(200).build());
     }
 }
+*/

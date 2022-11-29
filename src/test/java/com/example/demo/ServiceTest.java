@@ -50,10 +50,10 @@ public class ServiceTest {
     static JoinDto joinDto;
     static LoginDto loginDto;
     static RemakeAccessTokenDto remakeAccessTokenDto;
-    static UpdateExamDto updateExamDto;
-    static UpdatePasswordDto updatePasswordDto;
-    static UpdateRecordDto updateRecordDto;
-    static UpdateTeacherDto updateTeacherDto;
+    static ChangeExamDto changeExamDto;
+    static ChangePasswordDto changePasswordDto;
+    static ChangeRecordDto changeRecordDto;
+    static ChangeTeacherDto changeTeacherDto;
 
     @Order(1)
     @Test
@@ -84,20 +84,20 @@ public class ServiceTest {
         remakeAccessTokenDto = objectMapper.readValue("{\n" +
                 "  \"accessToken\": \"\"\n" +
                 "}",RemakeAccessTokenDto.class);
-        updatePasswordDto = objectMapper.readValue("{\n" +
+        changePasswordDto = objectMapper.readValue("{\n" +
                 "  \"id\": 2,\n" +
                 "  \"password\": \"test123!@#\",\n" +
                 "  \"newPassword\": \"test1234!@#\"\n" +
-                "}",UpdatePasswordDto.class);
-        updateRecordDto = objectMapper.readValue("{\n" +
+                "}", ChangePasswordDto.class);
+        changeRecordDto = objectMapper.readValue("{\n" +
                 "  \"recordId\": 3,\n" +
                 "  \"examId\": 2,\n" +
                 "  \"examResult\": 20\n" +
-                "}",UpdateRecordDto.class);
-        updateTeacherDto = objectMapper.readValue("{\n" +
+                "}", ChangeRecordDto.class);
+        changeTeacherDto = objectMapper.readValue("{\n" +
                 "  \"id\": 1,\n" +
                 "  \"nickName\": \"진짜선생님1\"\n" +
-                "}",UpdateTeacherDto.class);
+                "}", ChangeTeacherDto.class);
 
 //        addExamDto = objectMapper.readValue("{\n" +
 //                "  \"name\": \"2022 9월모의고사\",\n" +
@@ -173,7 +173,7 @@ public class ServiceTest {
     @Order(8)
     @Test
     void updatePasswordTest(){
-        joinService.updateTeacherPassword(updatePasswordDto);
+        joinService.changeTeacherPassword(changePasswordDto);
     }
 
     @Order(9)
@@ -188,7 +188,7 @@ public class ServiceTest {
     @Order(10)
     @Test()
     void login3(){
-        Tokens tokens = tokenManager.makeTokens(new Email(loginDto.getEmail()),new Password(updatePasswordDto.getNewPassword()));
+        Tokens tokens = tokenManager.makeTokens(new Email(loginDto.getEmail()),new Password(changePasswordDto.getNewPassword()));
         int realId = tokenManager.getIdFromAccessToken(tokens.getAccessToken());
         Assertions.assertThat(realId).isEqualTo(2);
     }
@@ -196,25 +196,25 @@ public class ServiceTest {
     @Order(11)
     @Test()
     void  updateNickName(){
-        joinService.updateTeacherNickname(updateTeacherDto);
+        joinService.changeTeacherNickname(changeTeacherDto);
     }
     @Order(12)
     @Test()
     void myInfoTest(){
-        SelectTeacherResponseDto result = joinService.getTeacher(updateTeacherDto.getId());
+        SelectTeacherResponseDto result = joinService.getTeacher(changeTeacherDto.getId());
         String realName = result.getNickName();
-        Assertions.assertThat(realName).isEqualTo(updateTeacherDto.getNickName());
+        Assertions.assertThat(realName).isEqualTo(changeTeacherDto.getNickName());
     }
     @Order(13)
     @Test
     void updateRecord(){
-        studentRecordService.updateStudentRecord(updateRecordDto);
+        studentRecordService.changeStudentRecord(changeRecordDto);
     }
     @Order(14)
     @Test
     void getRecordTest2(){
         int realScore = studentRecordService.getStudentRecords(2,addRecordDto.getSubject(),LocalDate.now()).get(0).getScore();
-        Assertions.assertThat(realScore).isEqualTo(updateRecordDto.getExamResult());
+        Assertions.assertThat(realScore).isEqualTo(changeRecordDto.getExamResult());
     }
 
     @Order(15)

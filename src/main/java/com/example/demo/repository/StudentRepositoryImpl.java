@@ -1,7 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.dto.request.AddStudentDto;
-import com.example.demo.model.dto.request.UpdateStudentDto;
+import com.example.demo.model.dto.request.ChangeStudentDto;
 import com.example.demo.model.dto.response.SelectStudentResponseDto;
 import com.example.demo.model.dto.response.StudentWithExamScore;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,7 +89,7 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
-    public void updateStudent(int teacherId, UpdateStudentDto student) {
+    public void updateStudent(int teacherId, ChangeStudentDto student) {
         String sql = "update student set name =? where id = ?";
         if(student.getName()!=null){
             jdbcTemplate.update(sql,student.getName(),student.getId());

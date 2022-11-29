@@ -2,7 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.exception.SystemException;
 import com.example.demo.model.dto.request.AddRecordDto;
-import com.example.demo.model.dto.request.UpdateRecordDto;
+import com.example.demo.model.dto.request.ChangeRecordDto;
 import com.example.demo.model.dto.response.ErrorMessage;
 import com.example.demo.model.dto.response.SelectRecordResponseDto;
 import com.example.demo.repository.RecordRepository;
@@ -37,9 +37,9 @@ public class StudentRecordServiceImpl implements StudentRecordService{
     }
 
     @Override
-    public void updateStudentRecord(UpdateRecordDto updateRecordDto) {
+    public void changeStudentRecord(ChangeRecordDto changeRecordDto) {
         try{
-            recordRepository.update(updateRecordDto);
+            recordRepository.update(changeRecordDto);
         }catch(Exception e){
             e.printStackTrace();
             ErrorMessage errorMessage = ErrorMessage.builder()

@@ -1,3 +1,4 @@
+/*
 package com.example.demo.controller;
 
 import com.example.demo.model.dto.request.AddStudentDto;
@@ -26,3 +27,4 @@ public class AddStudentController {
         return ResponseEntity.ok(ResponseDto.builder().code(200).response("학생 추가에 성공했습니다").build());
     }
 }
+*/

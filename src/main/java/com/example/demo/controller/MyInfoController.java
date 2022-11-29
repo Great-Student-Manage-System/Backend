@@ -1,3 +1,4 @@
+/*
 package com.example.demo.controller;
 
 import com.example.demo.model.dto.response.ResponseDto;
@@ -25,3 +26,4 @@ public class MyInfoController {
         return ResponseEntity.ok(ResponseDto.builder().code(200).data(dto).response("자기 정보 조회에 성공하였습니다.").build());
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.example.demo.controller;
 
 import com.example.demo.model.dto.request.JoinDto;
@@ -22,3 +23,4 @@ public class JoinController {
                 .build());
     }
 }
+*/

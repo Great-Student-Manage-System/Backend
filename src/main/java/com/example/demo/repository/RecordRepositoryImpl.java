@@ -1,7 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.dto.request.AddRecordDto;
-import com.example.demo.model.dto.request.UpdateRecordDto;
+import com.example.demo.model.dto.request.ChangeRecordDto;
 import com.example.demo.model.dto.response.SelectRecordResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,7 +35,7 @@ public class RecordRepositoryImpl implements RecordRepository {
     }
 
     @Override
-    public void update(UpdateRecordDto dto) {
+    public void update(ChangeRecordDto dto) {
         String sql = "update record set exam =?,score=? where id =?";
         if(dto.getExamId()==null) {
             sql = sql.replace("exam =?,", "");

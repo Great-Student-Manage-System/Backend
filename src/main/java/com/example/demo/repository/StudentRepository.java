@@ -1,7 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.dto.request.AddStudentDto;
-import com.example.demo.model.dto.request.UpdateStudentDto;
+import com.example.demo.model.dto.request.ChangeStudentDto;
 import com.example.demo.model.dto.response.SelectStudentResponseDto;
 import com.example.demo.model.dto.response.StudentWithExamScore;
 
@@ -19,5 +19,5 @@ public interface StudentRepository {
     List<StudentWithExamScore> findByTeacherAndExam(int teacherId, int examId);
     int pageCountByTeacherAndMaxPage(int teacherId,int maxPage);
     void deleteStudent(int teacherId, int studentId);
-    void updateStudent(int teacherId, UpdateStudentDto student);
+    void updateStudent(int teacherId, ChangeStudentDto student);
 }

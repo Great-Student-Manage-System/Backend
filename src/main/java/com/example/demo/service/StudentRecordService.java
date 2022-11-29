@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.dto.request.AddRecordDto;
-import com.example.demo.model.dto.request.UpdateRecordDto;
+import com.example.demo.model.dto.request.ChangeRecordDto;
 import com.example.demo.model.dto.response.SelectRecordResponseDto;
 
 import java.time.LocalDate;
@@ -28,8 +28,8 @@ public interface StudentRecordService {
 
     /**
      * 학생의 성적을 수정합니다.
-     * @param updateRecordDto 성적정보
+     * @param changeRecordDto 성적정보
      */
-    void updateStudentRecord(UpdateRecordDto updateRecordDto);
+    void changeStudentRecord(ChangeRecordDto changeRecordDto);
     void deleteStudentRecord(int recordId);
 }
