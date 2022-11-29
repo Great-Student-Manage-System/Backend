@@ -1,3 +1,4 @@
+/*
 package com.example.demo.controller;
 
 import com.example.demo.model.dto.response.ResponseDto;
@@ -29,3 +30,4 @@ public class SelectExamListController {
         return ResponseEntity.ok(ResponseDto.builder().code(200).response("시험 목록 조회를 성공했습니다.").data(examList).build());
     }
 }
+*/

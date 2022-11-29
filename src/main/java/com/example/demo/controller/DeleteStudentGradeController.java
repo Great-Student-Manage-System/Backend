@@ -1,3 +1,4 @@
+/*
 package com.example.demo.controller;
 
 import com.example.demo.model.dto.response.ResponseDto;
@@ -19,3 +20,4 @@ public class DeleteStudentGradeController {
             return ResponseEntity.ok(ResponseDto.builder().code(200).response("성적이 삭제되었습니다.").build());
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.example.demo.controller;
 
 import com.example.demo.model.dto.request.UpdateTeacherDto;
@@ -19,3 +20,4 @@ public class NickNameChangeController {
         return ResponseEntity.ok(ResponseDto.builder().code(200).response("닉네임 변경에 성공하였습니다.").build());
     }
 }
+*/

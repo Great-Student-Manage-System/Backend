@@ -1,3 +1,4 @@
+/*
 package com.example.demo.controller;
 
 import com.example.demo.model.dto.request.UpdateStudentDto;
@@ -26,3 +27,4 @@ public class UpdateStudentController {
         return ResponseEntity.ok(ResponseDto.builder().response("학생을 수정했습니다.").code(200).build());
     }
 }
+*/
