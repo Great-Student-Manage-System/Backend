@@ -35,7 +35,5 @@ public interface JoinService {
     /**
      * 선생님의 닉네임을 수정합니다.
      */
-    void changeTeacherNickname(ChangeTeacherDto dto);   //update -> change
-    void changeTeacherPassword(ChangePasswordDto dto);  //update -> change
-    SelectTeacherResponseDto getTeacher(int teacherId);
+
 }

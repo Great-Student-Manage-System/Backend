@@ -33,6 +33,8 @@ public class ServiceTest {
     @Autowired
     JoinService joinService;
     @Autowired
+    TeacherService teacherService;
+    @Autowired
     StudentRecordService studentRecordService;
     @Autowired
     StudentService studentService;
@@ -173,7 +175,7 @@ public class ServiceTest {
     @Order(8)
     @Test
     void updatePasswordTest(){
-        joinService.changeTeacherPassword(changePasswordDto);
+        teacherService.changeTeacherPassword(changePasswordDto);
     }
 
     @Order(9)
@@ -196,12 +198,12 @@ public class ServiceTest {
     @Order(11)
     @Test()
     void  updateNickName(){
-        joinService.changeTeacherNickname(changeTeacherDto);
+        teacherService.changeTeacherNickname(changeTeacherDto);
     }
     @Order(12)
     @Test()
     void myInfoTest(){
-        SelectTeacherResponseDto result = joinService.getTeacher(changeTeacherDto.getId());
+        SelectTeacherResponseDto result = teacherService.getTeacher(changeTeacherDto.getId());
         String realName = result.getNickName();
         Assertions.assertThat(realName).isEqualTo(changeTeacherDto.getNickName());
     }
