@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.dto.request.UpdatePasswordDto;
-import com.example.demo.model.dto.request.UpdateTeacherDto;
+import com.example.demo.model.dto.request.ChangePasswordDto;
+import com.example.demo.model.dto.request.ChangeTeacherDto;
 import com.example.demo.model.dto.response.ResponseDto;
 import com.example.demo.model.dto.response.SelectTeacherResponseDto;
 import com.example.demo.service.JoinService;
@@ -27,8 +27,8 @@ public class TeacherController {
     }
 
     @PatchMapping("/api/members/myinfo")
-    public ResponseEntity<ResponseDto<?>> changeNickName(@RequestBody UpdateTeacherDto dto){
-        joinService.updateTeacherNickname(dto);
+    public ResponseEntity<ResponseDto<?>> changeNickName(@RequestBody ChangeTeacherDto dto){
+        joinService.changeTeacherNickname(dto);
         return ResponseEntity.ok(ResponseDto.builder().code(200).response("닉네임 변경에 성공하였습니다.").build());
     }
 
@@ -39,8 +39,9 @@ public class TeacherController {
     }
 
     @PatchMapping("/api/members/password")
-    public ResponseEntity<ResponseDto<?>> changePassword(@RequestBody UpdatePasswordDto dto){
-        joinService.updateTeacherPassword(dto);
+    public ResponseEntity<ResponseDto<?>> changePassword(@RequestBody ChangePasswordDto dto){
+        joinService.changeTeacherPassword(dto);     /** updateTeacherPassword -> changeTeacherPassword **/
         return ResponseEntity.ok(ResponseDto.builder().code(200).response("비밀번호 변경에 성공하였습니다.").build());
     }
+    /** updatePassword -> changePassword **/
 }

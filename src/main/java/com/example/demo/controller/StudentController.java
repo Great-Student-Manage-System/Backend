@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.dto.request.AddRecordDto;
 import com.example.demo.model.dto.request.AddStudentDto;
-import com.example.demo.model.dto.request.UpdateStudentDto;
+import com.example.demo.model.dto.request.ChangeStudentDto;
 import com.example.demo.model.dto.response.ResponseDto;
 import com.example.demo.model.dto.response.SelectStudentsResponseDto;
 import com.example.demo.model.dto.response.StudentWithExamScore;
@@ -83,10 +83,10 @@ public class StudentController {
     }
 
     @PatchMapping("/api/students")
-    public ResponseEntity<ResponseDto<?>> updateStudent(@RequestHeader("Authorization") String accessTokenString, @RequestBody UpdateStudentDto dto){
+    public ResponseEntity<ResponseDto<?>> changeStudent(@RequestHeader("Authorization") String accessTokenString, @RequestBody ChangeStudentDto dto){
         AccessToken accessToken = new AccessToken(accessTokenString);
         int teacherId = tokenManager.getIdFromAccessToken(accessToken);
-        studentService.updateStudent(teacherId,dto);
+        studentService.changeStudent(teacherId,dto);
         return ResponseEntity.ok(ResponseDto.builder().response("학생을 수정했습니다.").code(200).build());
-    }   /** 메서드명 update -> updateStudent **/
+    }   /** 메서드명 update -> changeStudent **/
 }
