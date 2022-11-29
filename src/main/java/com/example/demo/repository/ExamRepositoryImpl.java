@@ -1,7 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.dto.request.AddExamDto;
-import com.example.demo.model.dto.request.UpdateExamDto;
+import com.example.demo.model.dto.request.ChangeExamDto;
 import com.example.demo.model.dto.response.ExamDto;
 import com.example.demo.model.dto.response.SelectExamResponseDto;
 import com.example.demo.model.dto.response.SelectExamsResponseDto;
@@ -66,7 +66,7 @@ public class ExamRepositoryImpl implements ExamRepository {
     }
 
     @Override
-    public void update(UpdateExamDto dto) {
+    public void update(ChangeExamDto dto) {
         String sql = "update exam set name =?,examDate=?,gradeCut=?,subject=? where id =?";
         jdbcTemplate.update(sql,dto.getName(),dto.getExamDate(),dto.getGradeCut(),dto.getSubject(),dto.getExamId());
     }

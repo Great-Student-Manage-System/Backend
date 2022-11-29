@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.dto.request.AddStudentDto;
-import com.example.demo.model.dto.request.UpdateStudentDto;
-import com.example.demo.model.dto.response.SelectStudentResponseDto;
+import com.example.demo.model.dto.request.ChangeStudentDto;
 import com.example.demo.model.dto.response.SelectStudentsResponseDto;
 import com.example.demo.model.dto.response.StudentWithExamScore;
 
@@ -31,5 +30,5 @@ public interface StudentService {
 
     void deleteStudent(int teacherId, int studentId);
 
-    void updateStudent(int teacherId, UpdateStudentDto student);
+    void changeStudent(int teacherId, ChangeStudentDto student);
 }

@@ -1,7 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.dto.request.AddExamDto;
-import com.example.demo.model.dto.request.UpdateExamDto;
+import com.example.demo.model.dto.request.ChangeExamDto;
 import com.example.demo.model.dto.response.SelectExamResponseDto;
 import com.example.demo.model.dto.response.SelectExamsResponseDto;
 
@@ -12,5 +12,5 @@ public interface ExamRepository {
     void save(AddExamDto dto);
     Optional<SelectExamResponseDto> findById(int examId);
     SelectExamsResponseDto findByYearAndTeacher(LocalDate year, int teacherId);
-    void update(UpdateExamDto dto);
+    void update(ChangeExamDto dto);
 }

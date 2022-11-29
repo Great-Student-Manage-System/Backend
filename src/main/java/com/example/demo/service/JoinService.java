@@ -1,9 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Email;
+import com.example.demo.model.dto.request.ChangePasswordDto;
+import com.example.demo.model.dto.request.ChangeTeacherDto;
 import com.example.demo.model.dto.request.JoinDto;
-import com.example.demo.model.dto.request.UpdatePasswordDto;
-import com.example.demo.model.dto.request.UpdateTeacherDto;
 import com.example.demo.model.dto.response.SelectTeacherResponseDto;
 
 /**
@@ -35,7 +35,7 @@ public interface JoinService {
     /**
      * 선생님의 닉네임을 수정합니다.
      */
-    void updateTeacherNickname(UpdateTeacherDto dto);
-    void updateTeacherPassword(UpdatePasswordDto dto);
+    void changeTeacherNickname(ChangeTeacherDto dto);   //update -> change
+    void changeTeacherPassword(ChangePasswordDto dto);  //update -> change
     SelectTeacherResponseDto getTeacher(int teacherId);
 }

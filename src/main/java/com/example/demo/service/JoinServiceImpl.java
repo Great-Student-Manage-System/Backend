@@ -3,9 +3,9 @@ package com.example.demo.service;
 import com.example.demo.exception.SystemException;
 import com.example.demo.model.Email;
 import com.example.demo.model.Password;
+import com.example.demo.model.dto.request.ChangePasswordDto;
 import com.example.demo.model.dto.request.JoinDto;
-import com.example.demo.model.dto.request.UpdatePasswordDto;
-import com.example.demo.model.dto.request.UpdateTeacherDto;
+import com.example.demo.model.dto.request.ChangeTeacherDto;
 import com.example.demo.model.dto.response.ErrorMessage;
 import com.example.demo.model.dto.response.SelectTeacherResponseDto;
 import com.example.demo.repository.CertRepository;
@@ -107,7 +107,7 @@ public class JoinServiceImpl implements JoinService {
     }
 
     @Override
-    public void updateTeacherNickname(UpdateTeacherDto dto) {
+    public void changeTeacherNickname(ChangeTeacherDto dto) {
         try {
             teacherRepository.updateNickname(dto);
         }catch (DataAccessException e){
@@ -119,7 +119,7 @@ public class JoinServiceImpl implements JoinService {
     }
 
     @Override
-    public void updateTeacherPassword(UpdatePasswordDto dto) {
+    public void changeTeacherPassword(ChangePasswordDto dto) {
         Password newPassword = new Password(dto.getNewPassword()); // Password 생성자에는 비밀번호 생성규칙 만족여부 체크 로직이 있다.
         teacherRepository.updatePassword(dto);
     }

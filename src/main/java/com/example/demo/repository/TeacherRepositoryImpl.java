@@ -2,9 +2,9 @@ package com.example.demo.repository;
 
 import com.example.demo.model.Email;
 import com.example.demo.model.Password;
+import com.example.demo.model.dto.request.ChangePasswordDto;
 import com.example.demo.model.dto.request.JoinDto;
-import com.example.demo.model.dto.request.UpdatePasswordDto;
-import com.example.demo.model.dto.request.UpdateTeacherDto;
+import com.example.demo.model.dto.request.ChangeTeacherDto;
 import com.example.demo.model.dto.response.SelectTeacherResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -47,13 +47,13 @@ public class TeacherRepositoryImpl implements TeacherRepository {
     }
 
     @Override
-    public void updateNickname(UpdateTeacherDto dto) {
+    public void updateNickname(ChangeTeacherDto dto) {
         String sql = "update teacher set nickName=? where id = ?";
         jdbcTemplate.update(sql,dto.getNickName(),dto.getId());
     }
 
     @Override
-    public void updatePassword(UpdatePasswordDto dto) {
+    public void updatePassword(ChangePasswordDto dto) {
         String sql = "update teacher set password=sha2(?,256) where id = ?";
         jdbcTemplate.update(sql,dto.getNewPassword(),dto.getId());
     }
