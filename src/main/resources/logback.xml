@@ -1,5 +1,5 @@
 <configuration>
-    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>./application_log/great.log</file>
         <encoder>
             <charset>UTF-8</charset>
@@ -11,8 +11,15 @@
             <totalSizeCap>5GB</totalSizeCap>
         </rollingPolicy>
     </appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{yyyyMMdd HH:mm:ss.SSS} [%thread] %-5level [%logger{0}:%line] - %msg %n</pattern>
+        </encoder>
+    </appender>
 
     <root level="info">
-        <appender-ref ref="file" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT" />
     </root>
 </configuration>
